@@ -1,0 +1,51 @@
+<section class="content-header">
+    <h1>
+        Transaction Type
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:;" ui-sref="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">create transaction type</li>
+    </ol>
+</section>
+
+<section>
+    <div class="col-sm-6 col-xs-6 pull-right" id="alert"></div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-8" style="margin:auto;margin-right: 20%;margin-left: 20%;">
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Transaction Type</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" data-ng-submit="newTransactionType()">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Name</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="name" data-ng-model="transactionType.name"
+                                       class="form-control"
+                                       id="name" placeholder="Name for the transaction type" required="">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-right">Submit</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

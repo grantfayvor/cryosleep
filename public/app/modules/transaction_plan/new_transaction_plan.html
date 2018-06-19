@@ -1,0 +1,83 @@
+<section class="content-header">
+    <h1>
+        Transaction Plan
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:;" ui-sref="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">create transaction plan</li>
+    </ol>
+</section>
+
+<section>
+    <div class="col-sm-6 col-xs-6 pull-right" id="alert"></div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-8" style="margin:auto;margin-right: 20%;margin-left: 20%;">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Transaction Plan</h3>
+                </div>
+                <form class="form-horizontal" data-ng-submit="newTransactionPlan()">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Plan Name</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="address" data-ng-model="transactionPlan.name"
+                                       class="form-control"
+                                       id="name" placeholder="Plan Name" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="max_amount" class="col-sm-3 control-label">Maximum Amount</label>
+
+                            <div class="col-sm-9">
+                                <input type="number" name="max_amount" data-ng-model="transactionPlan.max_amount"
+                                       class="form-control" id="max_amount" placeholder="Maximum Amount" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="min_amount" class="col-sm-3 control-label">Minimum Amount</label>
+
+                            <div class="col-sm-9">
+                                <input type="number" data-ng-model="transactionPlan.min_amount" class="form-control"
+                                       id="min_amount" placeholder="Minimum Amount" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profit" class="col-sm-3 control-label">Profit</label>
+
+                            <div class="col-sm-9">
+                                <input type="number" data-ng-model="transactionPlan.profit" class="form-control"
+                                       id="profit" placeholder="Profit to be made" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="investment_duration" class="col-sm-3 control-label">Investment duration
+                                (days)</label>
+
+                            <div class="col-sm-9">
+                                <input type="number" data-ng-model="transactionPlan.investment_duration"
+                                       class="form-control" id="investment_duration"
+                                       placeholder="Investment duration (days)" required="">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-right">Submit</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

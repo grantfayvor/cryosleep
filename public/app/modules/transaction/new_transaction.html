@@ -1,0 +1,274 @@
+<section class="content-header" data-ng-init="initialize()">
+    <h1>
+        Transactions
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:;" ui-sref="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">transfer funds</li>
+    </ol>
+</section>
+
+<section>
+    <div class="col-sm-6 col-xs-6 pull-right" id="alert"></div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Transfer Funds</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="col-sm-6 col-xs-6 col-md-6" data-ng-repeat="plan in transactionPlans">
+                        <div class="info-box col-sm-6 col-xs-6 col-md-6">
+                            <a href="javascript:void(0)" data-ng-click="transferFundsModal(plan)">
+                                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text" data-ng-bind="plan.name"></span>
+                                    <span class="info-box-number"><% plan.min_amount %> - <% plan.max_amount %> USD</span>
+                                    <span class="info-box-number" data-ng-bind="plan.profit + '%'"></span>
+                                    <span class="info-box-text"><% plan.investment_duration %> days</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-modal">
+                    <div class="modal" id="transferFundsModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            data-ng-click="deactivatePayNow()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Transfer Funds</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" data-ng-submit="generatePaymentURL()">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="amount_usd" class="col-sm-3 control-label">Amount
+                                                    (USD)</label>
+
+                                                <div class="col-sm-9">
+                                                    <input type="number" name="amount_usd"
+                                                           data-ng-model="transaction.amount_usd"
+                                                           data-ng-change="setBTCAmount(transaction.amount_usd)"
+                                                           class="form-control"
+                                                           id="amount_usd" placeholder="Amount (USD)"
+                                                           max="<% maxAmount %>" min="<% minAmount %>" required="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="amount_btc" class="col-sm-3 control-label">Amount
+                                                    (BTC)</label>
+
+                                                <div class="col-sm-9">
+                                                    <input type="number" disabled name="amount_btc"
+                                                           data-ng-model="transaction.amount_btc"
+                                                           class="form-control"
+                                                           id="amount_btc" placeholder="Amount (BTC)" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- ./box-body -->
+                                        <div class="box-footer">
+                                            <div class="row">
+                                                <div class="col-sm-3 col-xs-3 pull-left">
+                                                    <button type="button" class="btn btn-default pull-left"
+                                                            data-dismiss="modal" data-ng-click="deactivatePayNow()">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-8 col-xs-8 pull-right">
+                                                    <!--<div class="description-block border-left">-->
+                                                    <button type="button" class="btn btn-default pull-left"
+                                                            data-ng-click="showPreviewTransferModal()">Preview Transfer
+                                                    </button>
+                                                    <button type="submit" data-ng-if="!paymentURL"
+                                                            class="btn btn-info pull-right">Generate
+                                                        Transfer Link
+                                                    </button>
+                                                    <a href="<% paymentURL %>" data-ng-if="paymentURL"
+                                                       class="btn btn-success pull-right">Pay
+                                                        Now</a>
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                        <!-- /.box-footer -->
+                                    </form>
+                                </div>
+                                <!--<div class="modal-footer">-->
+                                <!--<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>-->
+                                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                <!--</div>-->
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+
+                <!--preview modal-->
+                <div class="example-modal">
+                    <div class="modal" id="previewTransferModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Preview Transfer</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="todo-list">
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    Plan Name
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                <span class="badge badge-info"
+                                                      data-ng-bind="transaction.plan.name"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    Plan Profit
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                <span class="badge badge-info"
+                                                      data-ng-bind="transaction.plan.profit + '%'"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    Plan Investment Duration
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                <span class="badge badge-info"
+                                                      data-ng-bind="transaction.plan.investment_duration + ' days'"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    Amount (USD)
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                <span class="badge badge-info"
+                                                      data-ng-bind="transaction.amount_usd || 'Set a valid value for this field'"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    Amount (BTC)
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                <span class="badge badge-info"
+                                                      data-ng-bind="transaction.amount_btc || 0"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    Credit Amount (USD)
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                <span class="badge badge-info"
+                                                      data-ng-bind="(transaction.amount_usd || 0) * transaction.plan.profit"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+
+
+                <!--<form class="form-horizontal" data-ng-submit="generatePaymentURL()">
+                    <div class="box-body">
+                        &lt;!&ndash;<div class="form-group">&ndash;&gt;
+                            &lt;!&ndash;<label for="transaction_plan_id" class="col-sm-3 control-label">Transaction Plan</label>&ndash;&gt;
+
+                            &lt;!&ndash;<div class="col-sm-9">&ndash;&gt;
+                                &lt;!&ndash;<select class="form-control" id="transaction_plan_id"&ndash;&gt;
+                                        &lt;!&ndash;data-ng-model="transaction.transaction_plan_id"&ndash;&gt;
+                                        &lt;!&ndash;data-ng-options="plan.id as plan.name for plan in transactionPlans"&ndash;&gt;
+                                        &lt;!&ndash;data-ng-selected="plan.id == transactionPlans[0].id"&ndash;&gt;
+                                        &lt;!&ndash;data-ng-change="setMaxMinAmounts()"&ndash;&gt;
+                                        &lt;!&ndash;required="">&ndash;&gt;
+                                &lt;!&ndash;</select>&ndash;&gt;
+                            &lt;!&ndash;</div>&ndash;&gt;
+                        &lt;!&ndash;</div>&ndash;&gt;
+                        <div class="form-group">
+                            <label for="amount_btc" class="col-sm-3 control-label">Amount (BTC)</label>
+
+                            <div class="col-sm-9">
+                                <input type="number" name="amount_btc" data-ng-model="transaction.amount_btc"
+                                       class="form-control"
+                                       id="amount_btc" placeholder="Amount (BTC)" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount_usd" class="col-sm-3 control-label">Amount (USD)</label>
+
+                            <div class="col-sm-9">
+                                <input type="number" name="amount_usd" data-ng-model="transaction.amount_usd"
+                                       class="form-control"
+                                       id="amount_usd" placeholder="Amount (USD)"
+                                       max="<% maxAmount %>" min="<% minAmount %>" required="">
+                            </div>
+                        </div>
+                    </div>
+                    &lt;!&ndash; ./box-body &ndash;&gt;
+                    <div class="box-footer">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-3 pull-right">
+                                <div class="description-block border-left">
+                                    <button type="submit" data-ng-if="!paymentURL" class="btn btn-info">Generate
+                                        Transfer Link
+                                    </button>
+                                    <a href="<% paymentURL %>" data-ng-if="paymentURL" class="btn btn-success">Pay
+                                        Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        &lt;!&ndash; /.row &ndash;&gt;
+                    </div>
+                    &lt;!&ndash; /.box-footer &ndash;&gt;
+                </form>-->
+
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

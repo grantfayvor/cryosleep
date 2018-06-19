@@ -1,0 +1,65 @@
+<section class="content-header" data-ng-init="getUnapprovedWithdrawals()">
+    <h1>
+        Transactions
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:;" ui-sref="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">approve withdrawal</li>
+    </ol>
+</section>
+
+<section>
+    <div class="col-sm-6 col-xs-6 pull-right" id="alert"></div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Approve Withdrawal</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="col-md-6 col-sm-6 col-xs-12" data-ng-repeat="w in withdrawals">
+                        <a href="javascript:void(0)" data-ng-click="generateWithdrawalURL(w)">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text" data-ng-bind="w.user.email"></span>
+                                    <span class="info-box-text" data-ng-bind="w.address"></span>
+                                    <span class="info-box-number" data-ng-bind="w.amount + w.currency"></span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </a>
+                    </div>
+                </div>
+                <!-- ./box-body -->
+                <div class="box-footer">
+                    <!--<div class="row">
+                        <div class="col-sm-3 col-xs-3 pull-right">
+                            <div class="description-block border-left">
+                                <button type="submit" data-ng-if="!paymentURL" class="btn btn-info">Generate
+                                    Transfer Link</button>
+                                <a href="<% paymentURL %>" data-ng-if="paymentURL" class="btn btn-success">Pay
+                                    Now</a>
+                            </div>
+                        </div>
+                    </div>-->
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-footer -->
+
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

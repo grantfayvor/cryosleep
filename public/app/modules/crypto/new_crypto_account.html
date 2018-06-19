@@ -1,0 +1,52 @@
+<section class="content-header">
+    <h1>
+        Register your bitcoincurrency account
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:;" ui-sref="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">bitcoin Currency account</li>
+    </ol>
+</section>
+
+<section>
+    <div class="col-sm-6 col-xs-6 pull-right" id="alert"></div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-8" style="margin:auto;margin-right: 20%;margin-left: 20%;">
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Register bitcoin public address</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" data-ng-submit="registerAddress()">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="address" class="col-sm-3 control-label">Public Address</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="address" data-ng-model="crypto.address" class="form-control"
+                                       id="address" placeholder="bitcoin currency public address" required="">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <span>Register your bitcoin public address. <b style="color: red;">Never reveal your private address to anyone</b></span>
+                        <hr>
+                        <button type="submit" class="btn btn-info pull-right">Submit</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
