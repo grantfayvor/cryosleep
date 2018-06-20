@@ -4,7 +4,7 @@ namespace App;
 
 use App\Models\Transaction;
 use app\Models\CryptoAccount;
-use Hexters\CoinPayment\Entities\CoinPaymentuserRelation;
+use Harrison\CoinPayment\Entities\CoinPaymentuserRelation;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Silber\Bouncer\Database\HasRolesAndAbilities;

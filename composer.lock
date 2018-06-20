@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "41ed9d889aee36dcef342d03112b9e48",
+    "content-hash": "d647a2b10462ee606444acf85ca97372",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -596,6 +596,64 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "harrison/coinpayment",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/grantfayvor/coinpayment.git",
+                "reference": "4d5422b8b7b5c17f0d5949b955a6e5799b636ffe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/grantfayvor/coinpayment/zipball/4d5422b8b7b5c17f0d5949b955a6e5799b636ffe",
+                "reference": "4d5422b8b7b5c17f0d5949b955a6e5799b636ffe",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "nesbot/carbon": "^1.25",
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Harrison\\CoinPayment\\Providers\\CoinPaymentServiceProvider"
+                    ],
+                    "aliases": {
+                        "CoinPayment": "Harrison\\CoinPayment\\Providers\\CoinPaymentFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Harrison\\CoinPayment\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Saifullah Syahidin",
+                    "email": "hexters@gmail.com"
+                },
+                {
+                    "name": "Harrison Favour",
+                    "email": "grantfayrouz101@gmail.com"
+                }
+            ],
+            "description": "CoinPayment PHP client for Laravel",
+            "keywords": [
+                "Coinpayment",
+                "cryptocurrency",
+                "payment gateway",
+                "payment method"
+            ],
+            "time": "2018-06-20 05:27:41"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -4288,7 +4346,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "harrison/coinpayment": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

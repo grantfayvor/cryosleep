@@ -9,7 +9,7 @@
 namespace App\Repositories;
 
 
-use Hexters\CoinPayment\Entities\cointpayment_log_trx;
+use Harrison\CoinPayment\Entities\cointpayment_log_trx;
 
 class cointpayment_log_trxRepository {
 
