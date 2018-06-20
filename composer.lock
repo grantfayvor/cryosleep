@@ -603,12 +603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grantfayvor/coinpayment.git",
-                "reference": "4d5422b8b7b5c17f0d5949b955a6e5799b636ffe"
+                "reference": "0da5cab35cee3d8a204aa668612197d64ef8796a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grantfayvor/coinpayment/zipball/4d5422b8b7b5c17f0d5949b955a6e5799b636ffe",
-                "reference": "4d5422b8b7b5c17f0d5949b955a6e5799b636ffe",
+                "url": "https://api.github.com/repos/grantfayvor/coinpayment/zipball/0da5cab35cee3d8a204aa668612197d64ef8796a",
+                "reference": "0da5cab35cee3d8a204aa668612197d64ef8796a",
                 "shasum": ""
             },
             "require": {
@@ -653,7 +653,7 @@
                 "payment gateway",
                 "payment method"
             ],
-            "time": "2018-06-20 05:27:41"
+            "time": "2018-06-20T10:26:34+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
