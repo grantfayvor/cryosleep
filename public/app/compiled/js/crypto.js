@@ -43613,7 +43613,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
         $scope.withdrawal = {};
         $scope.transactions = [];
         $scope.withdrawals = [];
-        var btc;
 
         $scope.initialize = function () {
             $scope.getTransactionPlans();
@@ -43650,7 +43649,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
                             if ($scope.transactionType.length) {
                                 $scope.transactionType = $scope.transactionType[0];
                             }
-                            $scope.transactions = $scope.transactions.map(function(t) {
+                            $scope.transactions = $scope.transactions.map(function (t) {
                                 var payload = t.payload = JSON.parse(t.payload);
                                 var plan;
                                 $scope.transactionPlans.filter(function (p) {
@@ -43661,7 +43660,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
                                     "plan": plan,
                                     "transactionTypeId": payload.details.transaction_type_id
                                 }, t);
-                            }).filter(function(t) {
+                            }).filter(function (t) {
                                 return t.transactionTypeId == $scope.transactionType.id;
                             });
                             console.log($scope.transactions);
@@ -43676,7 +43675,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
                             if ($scope.transactionType.length) {
                                 $scope.transactionType = $scope.transactionType[0];
                             }
-                            $scope.transactions = $scope.transactions.map(function(t) {
+                            $scope.transactions = $scope.transactions.map(function (t) {
                                 var payload = t.payload = JSON.parse(t.payload);
                                 var plan;
                                 $scope.transactionPlans.filter(function (p) {
@@ -43687,7 +43686,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
                                     "plan": plan,
                                     "transactionTypeId": payload.details.transaction_type_id
                                 }, t);
-                            }).filter(function(t) {
+                            }).filter(function (t) {
                                 return t.transactionTypeId == $scope.transactionType.id;
                             });
                         });
@@ -43705,6 +43704,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
                 AlertService.alertify('payment url successfully generated', 'success', 'Success');
             }, function (response) {
                 AlertService.alertify('an error occurred while trying to generate url for transfer. please try again', 'danger', 'Error');
+            });
+        };
+
+        $scope.createCallbackAddressForTransfer = function () {
+            TransactionService.createCallbackAddressForTransfer($scope.transaction, function (response) {
+                $scope.transaction.callbackDetails = response.data;
+            }, function (response) {
+                AlertService.alertify('an error occurred while generating the callback address', 'danger', 'Error');
             });
         };
 
@@ -43820,17 +43827,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
         };
 
         $scope.setBTCAmount = function (amountUsd) {
-            if (!btc) {
-                $scope.getRates(amountUsd, function (response) {
-                    $scope.rates = response.data;
-                    btc = $scope.rates.coins_accept.find(function (coin) {
-                        return /bitcoin/gi.test(coin.name) || /BTC/gi.test(coin.iso);
-                    });
-                    $scope.transaction.amount_btc = $scope.transaction.amount_usd * btc.rate;
+            $scope.getRates(amountUsd, function (response) {
+                $scope.rates = response.data;
+                var btc = $scope.rates.coins_accept.find(function (coin) {
+                    return /bitcoin/gi.test(coin.name) || /BTC/gi.test(coin.iso);
                 });
-            } else {
-                $scope.transaction.amount_btc = $scope.transaction.amount_usd * btc.rate;
-            }
+                $scope.transaction.amount_btc = btc.rate;
+            });
         };
 
         $scope.getRates = function (amount, optionalCallback) {
@@ -43886,6 +43889,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
         this.getRates = function (amount, successHandler, errorHandler) {
             APIService.get('/coinpayment/ajax/rates/' + amount, successHandler, errorHandler);
+        };
+
+        this.createCallbackAddressForTransfer = function (details, successHandler, errorHandler) {
+            APIService.post('/coinpayment/ajax/callback_address', details, successHandler, errorHandler);
         };
 
     });
