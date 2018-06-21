@@ -20,13 +20,19 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Transfer Funds</h3>
+                    <section id="introduction">
+                        <!--<h2 class="page-header">Instruction</h2>-->
+                        <h6 class="lead" style="font-size: 15px!important;">
+                            Select a plan and enter an amount (USD) which is within the range provided by that plan. After entering a valid amount, you can preview and then generate payment url which brings a button Pay Now redirecting to the transfer page.
+                        </h6>
+                    </section>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="col-sm-6 col-xs-6 col-md-6" data-ng-repeat="plan in transactionPlans">
                         <div class="info-box col-sm-6 col-xs-6 col-md-6">
                             <a href="javascript:void(0)" data-ng-click="transferFundsModal(plan)">
-                                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                                <span class="info-box-icon bg-aqua"><i class="ion ion-archive"></i></span>
 
                                 <div class="info-box-content">
                                     <span class="info-box-text" data-ng-bind="plan.name"></span>

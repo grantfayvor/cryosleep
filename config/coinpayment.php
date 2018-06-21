@@ -14,6 +14,7 @@
     'coinpayment_merchant_id' => env('COIN_PAYMENT_MERCHANT_ID', ''),
     'coinpayment_ipn_secret' => env('COIN_PAYMENT_IPN_SECRET', ''),
     'coinpayment_ipn_debug_email' => env('COIN_PAYMENT_IPN_DEBUG_EMAIL', ''),
+    'coinpayment_ipn_url' => env('COIN_PAYMENT_IPN_URL', ''),
 
 
     /*

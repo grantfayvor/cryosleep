@@ -19,15 +19,22 @@ class TransactionService
 
     private $repository;
     private $coinRepository;
+    private $planService;
 
-    public function __construct(TransactionRepository $repository, cointpayment_log_trxRepository $cointpayment_log_trxRepository)
+    public function __construct(TransactionRepository $repository, cointpayment_log_trxRepository $cointpayment_log_trxRepository,
+                                TransactionPlanService $planService)
     {
         $this->repository = $repository;
         $this->coinRepository = $cointpayment_log_trxRepository;
+        $this->planService = $planService;
     }
 
     public function generatePaymentURL(TransactionRequest $request)
     {
+        $transactionPlan = $this->planService->getById($request->transaction_plan_id);
+        if($transactionPlan->max_amount < $request->amount_usd || $transactionPlan->min_amount > $request->amount_usd) {
+            return response()->json(['error' => 'Enter a valid amount in the range for that plan'], 422);
+        }
         $transaction['amountTotal'] = $request->amount_usd;
         $transaction['note'] = 'Transfer to merchant for trading';
         $transaction['items'][0] = [
