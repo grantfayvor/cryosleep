@@ -229,7 +229,7 @@
                 var btc = $scope.rates.coins_accept.find(function (coin) {
                     return /bitcoin/gi.test(coin.name) || /BTC/gi.test(coin.iso);
                 });
-                $scope.transaction.amount_btc = btc.rate;
+                $scope.transaction.amount_btc = parseFloat(btc.rate);
             });
         };
 
