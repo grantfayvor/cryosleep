@@ -36,6 +36,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
     Route::post('/transaction/withdrawal/generate_url', 'TransactionController@generateWithdrawalURL');
     Route::get('/transaction/find/user', 'TransactionController@getUsersTransactions');
     Route::get('/transaction/user/confirmed', 'TransactionController@getUserConfirmedTransactions');
+    Route::post('/transaction/ipn_webhook', 'TransactionController@ipn_webhook');
 
     Route::post('/withdrawal', 'WithdrawalInfoController@create')->name('withdrawalinfo.save');
     Route::get('/withdrawal', 'WithdrawalInfoController@getAll');

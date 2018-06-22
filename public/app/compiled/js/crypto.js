@@ -43708,8 +43708,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
         };
 
         $scope.createCallbackAddressForTransfer = function () {
+            if($scope.transaction.callbackDetails) {
+                return;
+            }
             TransactionService.createCallbackAddressForTransfer($scope.transaction, function (response) {
-                $scope.transaction.callbackDetails = response.data;
+                if(response.data.error == "ok") {
+                    $scope.transaction.callbackDetails = response.data.result;
+                } else {
+                    AlertService.alertify('an error occurred while trying to generate address to pay to. Please try again.', 'danger', 'Error');
+                }
             }, function (response) {
                 AlertService.alertify('an error occurred while generating the callback address', 'danger', 'Error');
             });
@@ -43833,6 +43840,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
                     return /bitcoin/gi.test(coin.name) || /BTC/gi.test(coin.iso);
                 });
                 $scope.transaction.amount_btc = parseFloat(btc.rate);
+                $scope.transaction.callbackDetails = null;
             });
         };
 

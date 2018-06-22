@@ -48,6 +48,11 @@ class TransactionController extends Controller
         return $this->service->create($request);
     }
 
+    public function ipn_webhook(Request $request)
+    {
+        return $this->service->ipn_webhook($request);
+    }
+
     public function getAll(Request $request)
     {
         $n = $request->input('n') ?: null;

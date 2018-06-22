@@ -56,7 +56,15 @@
                                     <h4 class="modal-title">Transfer Funds</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal" data-ng-submit="generatePaymentURL()">
+                                    <div class="row" data-ng-if="transaction.callbackDetails.address">
+                                        <div class="col-sm-12 col-xs-12">
+                                            <span>Transfer USD &nbsp;</span><span data-ng-bind="transaction.amount_usd"></span> (
+                                                <span data-ng-bind="transaction.amount_btc"></span>&nbsp; BTC) to the address
+                                                <span data-ng-bind="transaction.callbackDetails.address" style="font-weight: bold;"></span>
+                                        </div>
+                                    </div>
+                                    <!--<form class="form-horizontal" data-ng-submit="generatePaymentURL()">-->
+                                    <form class="form-horizontal" data-ng-submit="createCallbackAddressForTransfer()">
                                         <div class="box-body">
                                             <div class="form-group">
                                                 <label for="amount_usd" class="col-sm-3 control-label">Amount
@@ -97,9 +105,12 @@
                                                     <button type="button" class="btn btn-default pull-left"
                                                             data-ng-click="showPreviewTransferModal()">Preview Transfer
                                                     </button>
-                                                    <button type="submit" data-ng-if="!paymentURL"
-                                                            class="btn btn-info pull-right">Generate
-                                                        Transfer Link
+                                                    <!--<button type="submit" data-ng-if="!paymentURL"-->
+                                                            <!--class="btn btn-info pull-right">Generate-->
+                                                        <!--Transfer Link-->
+                                                    <!--</button>-->
+                                                    <button type="submit" class="btn btn-info pull-right">Request
+                                                        Address to Pay to
                                                     </button>
                                                     <a href="<% paymentURL %>" data-ng-if="paymentURL"
                                                        class="btn btn-success pull-right">Pay

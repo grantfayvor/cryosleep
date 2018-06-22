@@ -13,6 +13,11 @@ use App\Http\Requests\TransactionRequest;
 use App\Repositories\cointpayment_log_trxRepository;
 use App\Repositories\TransactionRepository;
 use CoinPayment;
+use Route;
+use Illuminate\Http\Request;
+use Harrison\CoinPayment\Jobs\webhookProccessJob;
+use App\Jobs\coinPaymentCallbackProccedJob;
+
 
 class TransactionService
 {
@@ -62,6 +67,45 @@ class TransactionService
         $transaction['payload'] =  $request->getValues();
 
         return response()->json(['url' => CoinPayment::withdrawal_url_payload($transaction)]);
+    }
+
+    public function ipn_webhook(Request $req)
+    {
+        $payment = CoinPayment::api_call('get_tx_info', [
+            'txid' => $req->result['txn_id']
+        ]);
+
+        $transaction = $this->coinRepository->getOneByParam('payment_id', $req->result['txn_id']);
+        if ($payment['error'] == 'ok') {
+            $data = $payment['result'];
+
+            $saved = [
+                'payment_id' => $req->result['txn_id'],
+                'payment_address' => $data['payment_address'],
+                'coin' => $data['coin'],
+                'fiat' => config('coinpayment.default_currency'),
+                'status_text' => $data['status_text'],
+                'status' => $data['status'],
+                'payment_created_at' => date('Y-m-d H:i:s', $data['time_created']),
+                'expired' => date('Y-m-d H:i:s', $data['time_expires']),
+                'amount' => $data['amountf'],
+                'confirms_needed' => empty($req->result['confirms_needed']) ? 0 : $req->result['confirms_needed'],
+                'qrcode_url' => empty($req->result['qrcode_url']) ? '' : $req->result['qrcode_url'],
+                'status_url' => empty($req->result['status_url']) ? '' : $req->result['status_url'],
+                'payload' => empty($req->payload) ? json_encode([]) : json_encode($req->payload),
+            ];
+
+            $this->coinRepository->update($transaction->id, $saved);
+        }
+        $send['request_type'] = 'create_transaction';
+        $send['params'] = empty($req->params) ? [] : $req->params;
+        $send['payload'] = empty($req->payload) ? [] : $req->payload;
+        $send['transaction'] = $payment['error'] == 'ok' ? $payment['result'] : [];
+        if (Route::has('coinpayment.webhook')) {
+            dispatch(new webhookProccessJob($send));
+        }
+        dispatch(new coinPaymentCallbackProccedJob($send));
+        return $payment;
     }
 
     public function create(TransactionRequest $request)

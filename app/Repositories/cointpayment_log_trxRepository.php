@@ -11,7 +11,7 @@ namespace App\Repositories;
 
 use Harrison\CoinPayment\Entities\cointpayment_log_trx;
 
-class cointpayment_log_trxRepository {
+class cointpayment_log_trxRepository extends BaseRepository {
 
     protected $model;
 
