@@ -18,7 +18,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Total Deposit</span>
-                    <span class="info-box-number" data-ng-bind="depositInfo.totalAmount"></span>
+                    <span class="info-box-number" data-ng-bind="depositInfo.totalAmount || 0"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -48,7 +48,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Pending Withdrawal</span>
-                    <span class="info-box-number" data-ng-bind="withdrawalInfo.unApprovedTotal"></span>
+                    <span class="info-box-number" data-ng-bind="withdrawalInfo.unApprovedTotal || 0"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -61,7 +61,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Last Deposit</span>
-                    <span class="info-box-number" data-ng-bind="depositInfo.lastDeposit"></span>
+                    <span class="info-box-number" data-ng-bind="depositInfo.lastDeposit || 0"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -77,7 +77,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Withdrawal Total</span>
-                    <span class="info-box-number" data-ng-bind="withdrawalInfo.approvedTotal"></span>
+                    <span class="info-box-number" data-ng-bind="withdrawalInfo.approvedTotal || 0"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>

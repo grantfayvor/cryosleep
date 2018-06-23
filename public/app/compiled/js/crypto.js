@@ -43418,6 +43418,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
                     AlertService.alertify('an error occurred while trying to fetch your transactions. please reload this page', 'danger', 'Error');
                 });
             };
+
+            $rootScope.convertDate = function(date) {
+                return new Date(date).toDateString();
+            };
         }]);
 
     app.service('MainService', ['APIService', 'userURL', function (APIService, userURL) {

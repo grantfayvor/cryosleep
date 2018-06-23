@@ -303,11 +303,11 @@
 
                                     <p>
                                         {{ $user->full_name }}
-                                        <small>Member since Nov. 2012</small>
+                                        <small>Member since <span data-ng-bind="convertDate('{{ $user->created_at }}')"></span></small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
-                                <li class="user-body">
+                                {{--<li class="user-body">
                                     <div class="row">
                                         <div class="col-xs-4 text-center">
                                             <a href="javascript:void(0)">Followers</a>
@@ -320,7 +320,7 @@
                                         </div>
                                     </div>
                                     <!-- /.row -->
-                                </li>
+                                </li>--}}
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     {{--
@@ -387,10 +387,12 @@
                                 <a href="javascript:void(0);" ui-sref="new_crypto_account" ui-sref-active="active">
                                     <i class="fa fa-circle-o"></i> New Crypto Account</a>
                             </li>
+                            @if($user && $user->isAn('ADMIN'))
                             <li>
                                 <a href="javascript:void(0);" ui-sref="view_crypto_accounts" ui-sref-active="active">
                                     <i class="fa fa-circle-o"></i> View Crypto Accounts</a>
                             </li>
+                            @endif
                         </ul>
                     </li>
                     <li class="treeview">
@@ -425,16 +427,19 @@
                                 <a href="javascript:void(0);" ui-sref="withdrawal_request" ui-sref-active="active">
                                     <i class="fa fa-circle-o"></i> Make Request</a>
                             </li>
+                            @if($user && $user->isAn('ADMIN'))
                             <li>
                                 <a href="javascript:void(0);" ui-sref="approve_withdrawal" ui-sref-active="active">
                                     <i class="fa fa-circle-o"></i> Approve Withdrawals</a>
                             </li>
+                            @endif
                             <li>
                                 <a href="javascript:void(0);" ui-sref="view_withdrawals" ui-sref-active="active">
                                     <i class="fa fa-circle-o"></i> View Transactions</a>
                             </li>
                         </ul>
                     </li>
+                    @if($user && $user->isAn('ADMIN'))
                     <li class="treeview">
                         <a href="javascript:;">
                             <i class="fa fa-th"></i>
@@ -454,6 +459,8 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
+                    @if($user && $user->isAn('ADMIN'))
                     <li class="treeview">
                         <a href="javascript:;">
                             <i class="fa fa-edit"></i>
@@ -473,6 +480,7 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                 </ul>
             </section>
             <!-- /.sidebar -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Services\RolesAndClaimsService;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -30,14 +31,17 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/';
 
+    private $claimsService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(RolesAndClaimsService $claimsService)
     {
         $this->middleware('guest');
+        $this->claimsService = $claimsService;
     }
 
     /**
@@ -64,12 +68,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
         ]);
+        $this->claimsService->assignRole($user, 'USER');
+        return $user;
     }
 
     public function showRegistrationForm()
