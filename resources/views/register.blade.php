@@ -37,7 +37,7 @@
     <div class="register-box-body">
         <p class="login-box-msg">Register a new membership</p>
 
-        <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+        <form method="POST" action="{{ route('register', ['rf' => Request::input('rf')]) }}" aria-label="{{ __('Register') }}">
             @csrf
 
             <div class="form-group has-feedback">

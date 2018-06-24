@@ -307,20 +307,18 @@
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
-                                {{--<li class="user-body">
+                                <li class="user-body">
                                     <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="javascript:void(0)">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="javascript:void(0)">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="javascript:void(0)">Friends</a>
+                                        <div class="col-xs-12 col-sm-12 text-center">
+                                            Refer members using &nbsp;
+                                            <label id="referralCode" class="badge badge-info"></label>
+                                            <button type="button" onclick="copyReferralCode()" class="btn btn-default">
+                                                <span class="fa fa-bookmark-o"></span>
+                                            </button>
                                         </div>
                                     </div>
                                     <!-- /.row -->
-                                </li>--}}
+                                </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     {{--
@@ -733,6 +731,19 @@
     <!-- AdminLTE for demo purposes -->
     {{--
     <script src="dist/js/demo.js"></script>--}}
+
+    <script>
+        $(function() {
+            var referral = document.getElementById('referralCode');
+            referral.innerHTML = window.location.hostname + '/register?rf={{ $user->referral_code }}';
+        });
+        function copyReferralCode() {
+            var referral = document.getElementById('referralCode');
+            referral.select();
+            document.execCommand("copy");
+            alert("Referral link copied");
+        }
+    </script>
 
     <script src="app/compiled/js/crypto.js"></script>
 </body>

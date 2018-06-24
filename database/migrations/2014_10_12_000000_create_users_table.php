@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('secret_answer')->nullable();
 //            $table->string('bitcoin_account');
             $table->string('password');
+            $table->string('referral_code');
+            $table->integer('referrals')->unsigned()->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

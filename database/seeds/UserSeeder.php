@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@cryosleep.com',
             'username' => 'admin',
             'password' => Hash::make('password'),
+            'referral_code' => str_random(16) . 'AC',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]]);

@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -60,6 +62,23 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        if($request->has('rf')) {
+            $referral = $request->input('rf');
+            User::where('referral_code', $referral)->increment('referrals');
+        }
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -68,11 +87,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $split = explode(" ", $data['full_name']);
+        $initials = "";
+        for($i = 0; $i < count($split); $i++) {
+            $initials = $initials . str_split($split[$i])[0];
+        }
         $user = User::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
+            'referral_code' => str_random(16) . $initials
         ]);
         $this->claimsService->assignRole($user, 'USER');
         return $user;
