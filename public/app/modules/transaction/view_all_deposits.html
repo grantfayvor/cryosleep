@@ -1,0 +1,59 @@
+<section class="content-header" data-ng-init="getAllDeposits()">
+    <h1>
+        Transactions
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:;" ui-sref="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">transactions</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">All Transactions</h3>
+
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" data-ng-model="tableSearch" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                            <!--<div class="input-group-btn">-->
+                            <!--<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>S/N</th>
+                            <th>Plan Name</th>
+                            <th>Profit</th>
+                            <th>Investment Duration</th>
+                            <th>Amount (BTC)</th>
+                            <th>Amount (USD)</th>
+                            <!--<th>Actions</th>-->
+                        </tr>
+                        <tr data-ng-repeat="t in transactions | filter : tableSearch">
+                            <td><span data-ng-bind="$index + 1"></span></td>
+                            <td><span data-ng-bind="t.plan.name"></span></td>
+                            <td><span data-ng-bind="t.plan.profit + '%'"></span></td>
+                            <td><span data-ng-bind="t.plan.investment_duration + ' days'"></span> </td>
+                            <td><span data-ng-bind="t.amount"></span></td>
+                            <td><span data-ng-bind="t.payload.details.amount_usd"></span></td>
+                            <!--<td><button type="button" data-ng-click="deleteTransaction(t.id)" class="btn btn-sm btn-danger">Delete <i class="fa fa-times"></i> </button> </td>-->
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</section>
+<!-- /.content -->

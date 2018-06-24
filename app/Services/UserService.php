@@ -62,6 +62,11 @@ class UserService
         return $this->repository->getById($id);
     }
 
+    public function getAllCoinTransactions()
+    {
+        return $this->coinRepository->getAll();
+    }
+
     public function getUserConfirmedTransactions($userId)
     {
         return $this->coinRepository->getUserConfirmedTransactions($userId);

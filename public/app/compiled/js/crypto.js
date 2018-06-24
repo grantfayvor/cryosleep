@@ -43199,6 +43199,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
                     templateUrl: '/app/modules/transaction/view_transactions.html',
                     controller: 'TransactionController'
                 })
+                .state('view_all_deposits', {
+                    url: '/view_all_deposits',
+                    templateUrl: '/app/modules/transaction/view_all_deposits.html',
+                    controller: 'TransactionController'
+                })
                 .state('withdrawal_request', {
                     url: '/withdrawal_request',
                     templateUrl: '/app/modules/transaction/withdrawal_request.html',
@@ -43212,6 +43217,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
                 .state('view_withdrawals', {
                     url: '/view_withdrawals',
                     templateUrl: '/app/modules/transaction/view_withdrawals.html',
+                    controller: 'TransactionController'
+                })
+                .state('view_all_withdrawals', {
+                    url: '/view_all_withdrawals',
+                    templateUrl: '/app/modules/transaction/view_all_withdrawals.html',
                     controller: 'TransactionController'
                 })
                 .state('new_transaction_plan', {
@@ -43234,8 +43244,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
                     templateUrl: '/app/modules/transaction_type/view_transaction_types.html',
                     controller: 'TransactionTypeController'
                 })
-                .state('view_users', {
-                    url: '/view_users',
+                .state('manage_users', {
+                    url: '/manage_users',
                     templateUrl: '/app/modules/user/view_users.html',
                     controller: 'UserController'
                 });
@@ -43657,12 +43667,12 @@ Object.defineProperty(exports, '__esModule', { value: true });
                                 var payload = t.payload = JSON.parse(t.payload);
                                 var plan;
                                 $scope.transactionPlans.filter(function (p) {
-                                    return p.id == payload.details.transaction_plan_id;
+                                    return p.id == payload.details && payload.details.transaction_plan_id || payload.transaction_plan_id;
                                 });
                                 plan = $scope.transactionPlans.length && $scope.transactionPlans[0];
                                 return Object.assign({
                                     "plan": plan,
-                                    "transactionTypeId": payload.details.transaction_type_id
+                                    "transactionTypeId": payload.details && payload.details.transaction_type_id || payload.transaction_type_id
                                 }, t);
                             }).filter(function (t) {
                                 return t.transactionTypeId == $scope.transactionType.id;
@@ -43683,18 +43693,91 @@ Object.defineProperty(exports, '__esModule', { value: true });
                                 var payload = t.payload = JSON.parse(t.payload);
                                 var plan;
                                 $scope.transactionPlans.filter(function (p) {
-                                    return p.id == payload.details.transaction_plan_id;
+                                    return p.id == payload.details && payload.details.transaction_plan_id || payload.transaction_plan_id;
                                 });
                                 plan = $scope.transactionPlans.length && $scope.transactionPlans[0];
                                 return Object.assign({
                                     "plan": plan,
-                                    "transactionTypeId": payload.details.transaction_type_id
+                                    "transactionTypeId": payload.details && payload.details.transaction_type_id || payload.transaction_type_id
                                 }, t);
                             }).filter(function (t) {
                                 return t.transactionTypeId == $scope.transactionType.id;
                             });
                         });
                     }
+                });
+            }, function (response) {
+                console.log(response);
+                AlertService.alertify('an error occurred while trying to generate url for transfer. please try again', 'danger', 'Error');
+            });
+        };
+
+        $scope.getAllDeposits = function () {
+            TransactionService.getCoinTransactions(function (response) {
+                $scope.transactions = response.data;
+                $scope.getTransactionTypes(function (resp) {
+                    $scope.transactionTypes = resp.data;
+
+                    $scope.getTransactionPlans(function (response) {
+                        $scope.transactionPlans = response.data;
+                        $scope.transactionType = $scope.transactionTypes.filter(function (plan) {
+                            return /deposit/gi.test(plan.name);
+                        });
+                        if ($scope.transactionType.length) {
+                            $scope.transactionType = $scope.transactionType[0];
+                        }
+                        $scope.transactions = $scope.transactions.map(function (t) {
+                            var payload = t.payload = JSON.parse(t.payload);
+                            var plan;
+                            $scope.transactionPlans.filter(function (p) {
+                                return p.id == payload.details && payload.details.transaction_plan_id || payload.transaction_plan_id;
+                            });
+                            plan = $scope.transactionPlans.length && $scope.transactionPlans[0];
+                            return Object.assign({
+                                "plan": plan,
+                                "transactionTypeId": payload.details && payload.details.transaction_type_id || payload.transaction_type_id
+                            }, t);
+                        }).filter(function (t) {
+                            return t.transactionTypeId == $scope.transactionType.id;
+                        });
+                    });
+                });
+            }, function (response) {
+                console.log(response);
+                AlertService.alertify('an error occurred while trying to generate url for transfer. please try again', 'danger', 'Error');
+            });
+        };
+
+        $scope.getAllWithdrawals = function () {
+            TransactionService.getCoinTransactions(function (response) {
+                $scope.transactions = response.data;
+                $scope.getTransactionTypes(function (resp) {
+                    $scope.transactionTypes = resp.data;
+                    $scope.getTransactionPlans(function (response) {
+                        $scope.transactionPlans = response.data;
+                        $scope.transactionType = $scope.transactionTypes.filter(function (plan) {
+                            return /withdraw/gi.test(plan.name);
+                        });
+                        if ($scope.transactionType.length) {
+                            $scope.transactionType = $scope.transactionType[0];
+                        }
+                        $scope.transactions = $scope.transactions.map(function (t) {
+                            var payload = t.payload = JSON.parse(t.payload);
+                            var plan;
+                            $scope.transactionPlans.filter(function (p) {
+                                return p.id == payload.details && payload.details.transaction_plan_id || payload.transaction_plan_id;
+                            });
+                            plan = $scope.transactionPlans.length && $scope.transactionPlans[0];
+                            return Object.assign({
+                                "plan": plan,
+                                "transactionTypeId": payload.details && payload.details.transaction_type_id || payload.transaction_type_id
+                            }, t);
+                        }).filter(function (t) {
+                            return t.transactionTypeId == $scope.transactionType.id;
+                        });
+                        console.log($scope.transactions);
+                    });
+
                 });
             }, function (response) {
                 console.log(response);
@@ -43879,6 +43962,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
             APIService.get(transactionURL + '/find/user', successHandler, errorHandler);
         };
 
+        this.getCoinTransactions = function (successHandler, errorHandler) {
+            APIService.get(transactionURL + '/coinpayment/all', successHandler, errorHandler);
+        };
+
         this.delete = function (id, successHandler, errorHandler) {
             APIService.delete(transactionURL + '/' + id, successHandler, errorHandler);
         };
@@ -43928,11 +44015,87 @@ Object.defineProperty(exports, '__esModule', { value: true });
  */
 
 (function (app) {
-    app.controller('UserController', function ($scope, UserService) {
+    app.controller('UserController', function ($scope, UserService, AlertService) {
 
+        $scope.users = [];
+        $scope.user = {};
+        $scope.roles = [];
+
+        $scope.getAllUsers = function() {
+            UserService.getAllUsers(function(response) {
+                $scope.users = response.data;
+            }, function (response) {
+                AlertService.alertify('an error occurred while trying to fetch the users. please reload this page', 'danger', 'Error');
+            });
+        };
+
+        $scope.deleteUser = function(userId) {
+            UserService.deleteUser(userId, function(response) {
+                $scope.users = $scope.users.filter(function(u) {
+                    return u.id != userId;
+                });
+                AlertService.alertify('the user was successfully deleted', 'success', 'Success');
+            }, function (response) {
+                AlertService.alertify('an error occurred while trying to delete the user. please try again', 'danger', 'Error');
+            });
+        };
+
+        $scope.editRole = function (user) {
+            $scope.user = user;
+            UserService.getRoles(function(response) {
+                $scope.roles = response.data;
+                UserService.getUserRoles($scope.user.id, function (resp) {
+                    $scope.user.roleName = resp.data;
+                    $scope.user.role = $scope.roles.filter(function(role) {
+                        return role.name == $scope.user.roleName;
+                    })[0];
+                    $('#roleModal').modal('show');
+                    $scope.user.previousRole  = $scope.roles.filter(function(role) {
+                        return role.name == $scope.user.roleName;
+                    })[0];
+                }, function(resp) {
+                    AlertService.alertify('an error occurred while trying to fetch the user role', 'danger', 'Error');
+                });
+            }, function (response) {
+                AlertService.alertify('an error occurred while trying to fetch the roles', 'danger', 'Error');
+            });
+        };
+
+        $scope.changeRole = function () {
+            UserService.assignRole({
+                role: $scope.user.role,
+                previousRole: $scope.user.previousRole,
+                userId: $scope.user.id
+            }, function (response) {
+                $('#roleModal').modal('hide');
+                AlertService.alertify('the user role was successfully updated', 'success', 'Success');
+            }, function (response) {
+                $('#roleModal').modal('hide');
+                AlertService.alertify('an error occurred while trying to assign the role to the user', 'danger', 'Error');
+            });
+        };
     });
 
     app.service('UserService', function (APIService, userURL) {
 
+        this.getAllUsers = function(successHandler, errorHandler) {
+            APIService.get(userURL, successHandler, errorHandler);
+        };
+
+        this.deleteUser = function (userId, successHandler, errorHandler) {
+            APIService.delete(userURL + '/' + userId, successHandler, errorHandler);
+        };
+
+        this.getRoles = function(successHandler, errorHandler) {
+            APIService.get('/api/role-with-claims', successHandler, errorHandler);
+        };
+
+        this.getUserRoles = function(userId, successHandler, errorHandler) {
+            APIService.get(userURL + '/roles/' + userId, successHandler, errorHandler);
+        };
+
+        this.assignRole = function (details, successHandler, errorHandler) {
+            APIService.put('/api/role-with-claims/assign', details, successHandler, errorHandler);
+        };
     });
 })(cryptocoin);

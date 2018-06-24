@@ -10,16 +10,18 @@
 namespace App\Http\Controllers;
 
 use App\Services\RolesAndClaimsService;
+use App\Services\UserService;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\RolesAndClaimsRequest;
+//use App\Http\Requests\RolesAndClaimsRequest;
 
 class RolesAndClaimsController extends Controller
 {
 
-    public function __construct (RolesAndClaimsService $rolesAndClaimsService)
+    public function __construct (RolesAndClaimsService $rolesAndClaimsService, UserService $userService)
     {
         $this->rolesAndClaimsService = $rolesAndClaimsService;
+        $this->userService = $userService;
     }
 
     public function getAllRoles()
@@ -34,9 +36,7 @@ class RolesAndClaimsController extends Controller
 
     public function assignRole(Request $request)
     {
-        $userDetails = $request->user;
-        $user = new User();
-        $user->setValues($userDetails['full_name'], $userDetails['email'], $userDetails['employee_id'], $userDetails['sex'], $userDetails['id']);
+        $user = $this->userService->getById($request->userId);
         $this->rolesAndClaimsService->assignRole($user, $request->role);
         return response()->json($this->rolesAndClaimsService->retractUserRole($user, $request->previousRole));
     }

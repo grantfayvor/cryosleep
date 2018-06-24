@@ -311,7 +311,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 text-center">
                                             Refer members using &nbsp;
-                                            <label id="referralCode" class="badge badge-info"></label>
+                                            <input type="text" id="referralCode" class="form-control" readonly>
                                             <button type="button" onclick="copyReferralCode()" class="btn btn-default">
                                                 <span class="fa fa-bookmark-o"></span>
                                             </button>
@@ -408,8 +408,14 @@
                             </li>
                             <li>
                                 <a href="javascript:void(0);" ui-sref="view_deposits" ui-sref-active="active">
-                                    <i class="fa fa-circle-o"></i> View Transactions</a>
+                                    <i class="fa fa-circle-o"></i> My Transactions</a>
                             </li>
+                            @if($user && $user->isAn('ADMIN'))
+                            <li>
+                                <a href="javascript:void(0);" ui-sref="view_all_deposits" ui-sref-active="active">
+                                    <i class="fa fa-circle-o"></i> View All Transactions</a>
+                            </li>
+                            @endif
                         </ul>
                     </li>
                     <li class="treeview">
@@ -433,8 +439,14 @@
                             @endif
                             <li>
                                 <a href="javascript:void(0);" ui-sref="view_withdrawals" ui-sref-active="active">
-                                    <i class="fa fa-circle-o"></i> View Transactions</a>
+                                    <i class="fa fa-circle-o"></i> My Transactions</a>
                             </li>
+                            @if($user && $user->isAn('ADMIN'))
+                            <li>
+                                <a href="javascript:void(0);" ui-sref="view_all_withdrawals" ui-sref-active="active">
+                                    <i class="fa fa-circle-o"></i> View All Transactions</a>
+                            </li>
+                            @endif
                         </ul>
                     </li>
                     @if($user && $user->isAn('ADMIN'))
@@ -478,6 +490,23 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
+                    @if($user && $user->isAn('ADMIN'))
+                        <li class="treeview">
+                            <a href="javascript:;">
+                                <i class="fa fa-user"></i>
+                                <span>Users</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="javascript:void(0);" ui-sref="manage_users" ui-sref-active="active">
+                                        <i class="fa fa-circle-o"></i> Manage Users</a>
+                                </li>
+                            </ul>
+                        </li>
                     @endif
                 </ul>
             </section>
@@ -684,11 +713,12 @@
                         <!-- /.form-group -->
 
                         <div class="form-group">
-                            <label class="control-sidebar-subheading">
+                            <label id="referralContainer" class="control-sidebar-subheading">
                                 Delete chat history
                                 <a href="javascript:void(0)" class="text-red pull-right">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
+                                <input type="text" id="referralInput">
                             </label>
                         </div>
                         <!-- /.form-group -->
@@ -735,11 +765,11 @@
     <script>
         $(function() {
             var referral = document.getElementById('referralCode');
-            referral.innerHTML = window.location.hostname + '/register?rf={{ $user->referral_code }}';
+            referral.value = window.location.hostname + '/register?rf={{ $user->referral_code }}';
+//            document.getElementById('referralInput').value = referral.innerHTML;
         });
         function copyReferralCode() {
-            var referral = document.getElementById('referralCode');
-            referral.select();
+            document.getElementById('referralCode').select();
             document.execCommand("copy");
             alert("Referral link copied");
         }

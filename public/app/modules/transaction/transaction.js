@@ -50,12 +50,12 @@
                                 var payload = t.payload = JSON.parse(t.payload);
                                 var plan;
                                 $scope.transactionPlans.filter(function (p) {
-                                    return p.id == payload.details.transaction_plan_id;
+                                    return p.id == payload.details && payload.details.transaction_plan_id || payload.transaction_plan_id;
                                 });
                                 plan = $scope.transactionPlans.length && $scope.transactionPlans[0];
                                 return Object.assign({
                                     "plan": plan,
-                                    "transactionTypeId": payload.details.transaction_type_id
+                                    "transactionTypeId": payload.details && payload.details.transaction_type_id || payload.transaction_type_id
                                 }, t);
                             }).filter(function (t) {
                                 return t.transactionTypeId == $scope.transactionType.id;
@@ -76,18 +76,91 @@
                                 var payload = t.payload = JSON.parse(t.payload);
                                 var plan;
                                 $scope.transactionPlans.filter(function (p) {
-                                    return p.id == payload.details.transaction_plan_id;
+                                    return p.id == payload.details && payload.details.transaction_plan_id || payload.transaction_plan_id;
                                 });
                                 plan = $scope.transactionPlans.length && $scope.transactionPlans[0];
                                 return Object.assign({
                                     "plan": plan,
-                                    "transactionTypeId": payload.details.transaction_type_id
+                                    "transactionTypeId": payload.details && payload.details.transaction_type_id || payload.transaction_type_id
                                 }, t);
                             }).filter(function (t) {
                                 return t.transactionTypeId == $scope.transactionType.id;
                             });
                         });
                     }
+                });
+            }, function (response) {
+                console.log(response);
+                AlertService.alertify('an error occurred while trying to generate url for transfer. please try again', 'danger', 'Error');
+            });
+        };
+
+        $scope.getAllDeposits = function () {
+            TransactionService.getCoinTransactions(function (response) {
+                $scope.transactions = response.data;
+                $scope.getTransactionTypes(function (resp) {
+                    $scope.transactionTypes = resp.data;
+
+                    $scope.getTransactionPlans(function (response) {
+                        $scope.transactionPlans = response.data;
+                        $scope.transactionType = $scope.transactionTypes.filter(function (plan) {
+                            return /deposit/gi.test(plan.name);
+                        });
+                        if ($scope.transactionType.length) {
+                            $scope.transactionType = $scope.transactionType[0];
+                        }
+                        $scope.transactions = $scope.transactions.map(function (t) {
+                            var payload = t.payload = JSON.parse(t.payload);
+                            var plan;
+                            $scope.transactionPlans.filter(function (p) {
+                                return p.id == payload.details && payload.details.transaction_plan_id || payload.transaction_plan_id;
+                            });
+                            plan = $scope.transactionPlans.length && $scope.transactionPlans[0];
+                            return Object.assign({
+                                "plan": plan,
+                                "transactionTypeId": payload.details && payload.details.transaction_type_id || payload.transaction_type_id
+                            }, t);
+                        }).filter(function (t) {
+                            return t.transactionTypeId == $scope.transactionType.id;
+                        });
+                    });
+                });
+            }, function (response) {
+                console.log(response);
+                AlertService.alertify('an error occurred while trying to generate url for transfer. please try again', 'danger', 'Error');
+            });
+        };
+
+        $scope.getAllWithdrawals = function () {
+            TransactionService.getCoinTransactions(function (response) {
+                $scope.transactions = response.data;
+                $scope.getTransactionTypes(function (resp) {
+                    $scope.transactionTypes = resp.data;
+                    $scope.getTransactionPlans(function (response) {
+                        $scope.transactionPlans = response.data;
+                        $scope.transactionType = $scope.transactionTypes.filter(function (plan) {
+                            return /withdraw/gi.test(plan.name);
+                        });
+                        if ($scope.transactionType.length) {
+                            $scope.transactionType = $scope.transactionType[0];
+                        }
+                        $scope.transactions = $scope.transactions.map(function (t) {
+                            var payload = t.payload = JSON.parse(t.payload);
+                            var plan;
+                            $scope.transactionPlans.filter(function (p) {
+                                return p.id == payload.details && payload.details.transaction_plan_id || payload.transaction_plan_id;
+                            });
+                            plan = $scope.transactionPlans.length && $scope.transactionPlans[0];
+                            return Object.assign({
+                                "plan": plan,
+                                "transactionTypeId": payload.details && payload.details.transaction_type_id || payload.transaction_type_id
+                            }, t);
+                        }).filter(function (t) {
+                            return t.transactionTypeId == $scope.transactionType.id;
+                        });
+                        console.log($scope.transactions);
+                    });
+
                 });
             }, function (response) {
                 console.log(response);
@@ -270,6 +343,10 @@
 
         this.getUserTransactions = function (successHandler, errorHandler) {
             APIService.get(transactionURL + '/find/user', successHandler, errorHandler);
+        };
+
+        this.getCoinTransactions = function (successHandler, errorHandler) {
+            APIService.get(transactionURL + '/coinpayment/all', successHandler, errorHandler);
         };
 
         this.delete = function (id, successHandler, errorHandler) {

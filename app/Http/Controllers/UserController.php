@@ -34,4 +34,18 @@ class UserController {
         return response()->json(['transactions' => $transactions, 'withdrawals' => $withdrawals]);
     }
 
+    public function getAll()
+    {
+        return $this->service->getAll();
+    }
+
+    public function delete($id)
+    {
+        return $this->service->delete($id);
+    }
+
+    public function getUserRoles($userId) {
+        $user = $this->service->getById($userId);
+        return response()->json($user->isAn('ADMIN') ? 'ADMIN' : 'USER');
+    }
 }

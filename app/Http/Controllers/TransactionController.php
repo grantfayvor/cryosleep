@@ -60,6 +60,11 @@ class TransactionController extends Controller
         return $this->service->getAll($n, $fields);
     }
 
+    public function getAllCoinTransactions()
+    {
+        return $this->userService->getAllCoinTransactions();
+    }
+
     public function getById($id)
     {
         return $this->service->getById($id);

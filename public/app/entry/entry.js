@@ -46,6 +46,11 @@ var cryptocoin = angular.module('app.crypto', ['ui.router']);
                     templateUrl: '/app/modules/transaction/view_transactions.html',
                     controller: 'TransactionController'
                 })
+                .state('view_all_deposits', {
+                    url: '/view_all_deposits',
+                    templateUrl: '/app/modules/transaction/view_all_deposits.html',
+                    controller: 'TransactionController'
+                })
                 .state('withdrawal_request', {
                     url: '/withdrawal_request',
                     templateUrl: '/app/modules/transaction/withdrawal_request.html',
@@ -59,6 +64,11 @@ var cryptocoin = angular.module('app.crypto', ['ui.router']);
                 .state('view_withdrawals', {
                     url: '/view_withdrawals',
                     templateUrl: '/app/modules/transaction/view_withdrawals.html',
+                    controller: 'TransactionController'
+                })
+                .state('view_all_withdrawals', {
+                    url: '/view_all_withdrawals',
+                    templateUrl: '/app/modules/transaction/view_all_withdrawals.html',
                     controller: 'TransactionController'
                 })
                 .state('new_transaction_plan', {
@@ -81,8 +91,8 @@ var cryptocoin = angular.module('app.crypto', ['ui.router']);
                     templateUrl: '/app/modules/transaction_type/view_transaction_types.html',
                     controller: 'TransactionTypeController'
                 })
-                .state('view_users', {
-                    url: '/view_users',
+                .state('manage_users', {
+                    url: '/manage_users',
                     templateUrl: '/app/modules/user/view_users.html',
                     controller: 'UserController'
                 });

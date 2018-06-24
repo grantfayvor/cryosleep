@@ -38,6 +38,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
     Route::post('/transaction/withdrawal/generate_url', 'TransactionController@generateWithdrawalURL');
     Route::get('/transaction/find/user', 'TransactionController@getUsersTransactions');
     Route::get('/transaction/user/confirmed', 'TransactionController@getUserConfirmedTransactions');
+    Route::get('/transaction/coinpayment/all', 'TransactionController@getAllCoinTransactions');
 
     Route::post('/withdrawal', 'WithdrawalInfoController@create')->name('withdrawalinfo.save');
     Route::get('/withdrawal', 'WithdrawalInfoController@getAll')->middleware('admin');
@@ -55,6 +56,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
     Route::delete('/transaction_type/{id}', 'TransactionTypeController@delete')->middleware('admin');
 
     Route::get('/user/transactions', 'UserController@getTransactionsInformation');
+    Route::get('/user', 'UserController@getAll')->middleware('admin');
+    Route::delete('/user/{id}', 'UserController@delete')->middleware('admin');
+    Route::get('/user/roles/{userId}', 'UserController@getUserRoles')->middleware('admin');
 
     Route::get('/role-with-claims', 'RolesAndClaimsController@getAllRoles')->middleware('admin');
     Route::post('/role-with-claims/create', 'RolesAndClaimsController@create')->middleware('admin');
