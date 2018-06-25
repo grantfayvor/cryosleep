@@ -44040,7 +44040,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
             });
         };
 
-        $scope.editRole = function (user) {
+        $scope.editUser = function (user) {
             $scope.user = user;
             UserService.getRoles(function(response) {
                 $scope.roles = response.data;
@@ -44061,17 +44061,19 @@ Object.defineProperty(exports, '__esModule', { value: true });
             });
         };
 
-        $scope.changeRole = function () {
-            UserService.assignRole({
+        $scope.updateUser = function () {
+            UserService.updateUser({
+                fullName: $scope.user.full_name,
+                email: $scope.user.email,
                 role: $scope.user.role,
                 previousRole: $scope.user.previousRole,
                 userId: $scope.user.id
             }, function (response) {
                 $('#roleModal').modal('hide');
-                AlertService.alertify('the user role was successfully updated', 'success', 'Success');
+                AlertService.alertify('the user was successfully updated', 'success', 'Success');
             }, function (response) {
                 $('#roleModal').modal('hide');
-                AlertService.alertify('an error occurred while trying to assign the role to the user', 'danger', 'Error');
+                AlertService.alertify('an error occurred while trying to update the user', 'danger', 'Error');
             });
         };
     });
@@ -44094,8 +44096,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
             APIService.get(userURL + '/roles/' + userId, successHandler, errorHandler);
         };
 
-        this.assignRole = function (details, successHandler, errorHandler) {
-            APIService.put('/api/role-with-claims/assign', details, successHandler, errorHandler);
+        this.updateUser = function (details, successHandler, errorHandler) {
+            APIService.put(userURL + '/update', details, successHandler, errorHandler);
         };
     });
 })(cryptocoin);

@@ -53,7 +53,7 @@
                             <!--<td><span data-ng-bind="user.totalWithdrawals"></span></td>-->
                             <!--<td><span data-ng-bind="user.totalProfit"></span></td>-->
                             <td>
-                                <button type="button" class="btn btn-sm btn-info" data-ng-click="editRole(user)">Change Role <i class="fa fa-circle-o"></i></button>
+                                <button type="button" class="btn btn-sm btn-info" data-ng-click="editUser(user)">Edit User <i class="fa fa-circle-o"></i></button>
                                 <button type="button" data-ng-click="deleteUser(user.id)" class="btn btn-sm btn-danger">Delete <i class="fa fa-trash"></i> </button> </td>
                         </tr>
                     </table>
@@ -83,8 +83,8 @@
                                     Full Name
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
-                                                <span class="badge badge-info"
-                                                      data-ng-bind="user.full_name"></span>
+                                                <input type="text" class="form-control"
+                                                      data-ng-model="user.full_name">
                                 </div>
                             </div>
                         </li>
@@ -94,8 +94,8 @@
                                     Email
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
-                                                <span class="badge badge-info"
-                                                      data-ng-bind="user.email"></span>
+                                                <input type="text" class="form-control"
+                                                      data-ng-model="user.email">
                                 </div>
                             </div>
                         </li>
@@ -118,8 +118,8 @@
                                 <div class="col-sm-6 col-xs-6">
                                                 <select class="form-control"
                                                         data-ng-model="user.role"
-                                                        data-ng-selected="role.name == user.roleName"
-                                                        data-ng-change="changeRole()">
+                                                        data-ng-selected="role.name == user.roleName">
+                                                        <!--data-ng-change="changeRole()">-->
                                                     <option value="<% role.id %>" data-ng-repeat="role in roles"><% role.name %></option>
                                                 </select>
                                 </div>
@@ -130,6 +130,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close
                     </button>
+                    <button type="button" class="btn btn-primary pull-right" data-ng-click="updateUser()">Submit</button>
                 </div>
             </div>
             <!-- /.modal-content -->

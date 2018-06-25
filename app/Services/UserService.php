@@ -85,6 +85,14 @@ class UserService
         return response()->json(['message' => 'the resource was successfully updated', 'data' => $request->getValues()], 200);
     }
 
+    public function updateWithArray($id, $userArray)
+    {
+        if (!$this->repository->update($id, $userArray)) {
+            return response()->json(['message' => 'the resource was not updated', 'data' => $userArray], 500);
+        }
+        return response()->json(['message' => 'the resource was successfully updated', 'data' => $userArray], 200);
+    }
+
     public function delete($id)
     {
         if (!$this->repository->delete($id)) {

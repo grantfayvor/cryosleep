@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Services\RolesAndClaimsService;
 use App\Services\TransactionService;
 use App\Services\UserService;
 use App\Services\WithdrawalInfoService;
@@ -19,12 +20,15 @@ class UserController {
     private $service;
     private $transactionService;
     private $withdrawalService;
+    private $rolesService;
 
-    public function __construct(UserService $userService, TransactionService $transactionService, WithdrawalInfoService $infoService)
+    public function __construct(UserService $userService, TransactionService $transactionService,
+                                WithdrawalInfoService $infoService, RolesAndClaimsService $rolesService)
     {
         $this->service = $userService;
         $this->transactionService = $transactionService;
         $this->withdrawalService = $infoService;
+        $this->rolesService = $rolesService;
     }
 
     public function getTransactionsInformation(Request $request)
@@ -47,5 +51,15 @@ class UserController {
     public function getUserRoles($userId) {
         $user = $this->service->getById($userId);
         return response()->json($user->isAn('ADMIN') ? 'ADMIN' : 'USER');
+    }
+
+    public function update(Request $request)
+    {
+        if($request->role && $request->previousRole) {
+            $user = $this->service->getById($request->userId);
+            $this->rolesService->assignRole($user, $request->role);
+            $this->rolesService->retractUserRole($user, $request->previousRole);
+        }
+        return $this->service->updateWithArray($request->userId, ['full_name' => $request->fullName, 'email' => $request->email]);
     }
 }
