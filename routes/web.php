@@ -11,7 +11,21 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/',  function (){
+    return view('pages.home');
+})->name('test_home');
+Route::get('test_about', function (){
+    return view('pages.about');
+});
+Route::get('get_started', function (){
+    return view('pages.get_started');
+});
+Route::get('terms', function (){
+    return view('pages.terms');
+});
+Route::get('contact_us', function (){
+    return view('pages.contact');
+});
 
 Auth::routes();
 
@@ -74,3 +88,4 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
