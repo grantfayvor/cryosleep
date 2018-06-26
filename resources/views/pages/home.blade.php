@@ -432,27 +432,27 @@
                     <!-- /.flat-counter -->
                 </div>
                 <div class="col-lg-2 col-sm-6">
-                    <div class="flat-counter style2 before">
+                    <div class="flat-counter style2 padding-another">
                         <div class="content-counter">
-                            <div class="numb-count" data-to="{{ $registered_users }}" data-speed="2000" data-waypoint-active="yes">{{ $registered_users }}</div>
-                            <div class="name-count">Registered Accounts</div>
+                            <div class="numb-count" data-to="10" data-speed="2000" data-waypoint-active="yes">10</div>
+                            <div class="name-count">Registered Users</div>
                         </div>
                     </div>
                     <!-- /.flat-counter -->
                 </div>
                 <div class="col-lg-2 col-sm-6">
-                    <div class="flat-counter style2">
+                    <div class="flat-counter style2 padding-another">
                         <div class="content-counter">
-                            <div class="numb-count" data-to="{{ sprintf('%.5f',$total_site_deposit) }}" data-speed="2000" data-waypoint-active="yes">{{ sprintf('%.5f',$total_site_deposit) }}</div>
+                            <div class="numb-count" data-to="10" data-speed="2000" data-waypoint-active="yes">10</div>
                             <div class="name-count">Deposits</div>
                         </div>
                     </div>
                     <!-- /.flat-counter -->
                 </div>
                 <div class="col-lg-2 col-sm-6">
-                    <div class="flat-counter style2 before percent">
+                    <div class="flat-counter style2 padding-another">
                         <div class="content-counter">
-                            <div class="numb-count" data-to="{{ sprintf('%.5f',$total_site_withdraw ) }}" data-speed="2000" data-waypoint-active="yes">{{ sprintf('%.5f',$total_site_withdraw ) }}</div>
+                            <div class="numb-count" data-to="10" data-speed="2000" data-waypoint-active="yes">10</div>
                             <div class="name-count">Withdrawals</div>
                         </div>
                     </div>
