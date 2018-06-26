@@ -67,6 +67,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
     Route::delete('/role-with-claims/retract-user-role', 'RolesAndClaimsController@retractUserRole')->middleware('admin');
     Route::delete('/role-with-claims/retract-user-claims', 'RolesAndClaimsController@retractUserClaims')->middleware('admin');
     Route::delete('/role-with-claims/retract-role-claims', 'RolesAndClaimsController@retractRoleClaims')->middleware('admin');
+
+    Route::get('/referrals/{referralCode}', 'ReferralController@getUserReferrals');
 });
 
 Auth::routes();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Services\ReferralService;
 use App\Services\RolesAndClaimsService;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -34,16 +35,18 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
 
     private $claimsService;
+    private $referralService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(RolesAndClaimsService $claimsService)
+    public function __construct(RolesAndClaimsService $claimsService, ReferralService $referralService)
     {
         $this->middleware('guest');
         $this->claimsService = $claimsService;
+        $this->referralService = $referralService;
     }
 
     /**
@@ -71,6 +74,11 @@ class RegisterController extends Controller
         if($request->has('rf')) {
             $referral = $request->input('rf');
             User::where('referral_code', $referral)->increment('referrals');
+            $referralData = [
+                'name' => $request->full_name,
+                'referee' => $referral
+            ];
+            $this->referralService->create($referralData);
         }
 
         $this->guard()->login($user);

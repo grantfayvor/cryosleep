@@ -70,7 +70,7 @@
                                 <label for="amount" class="control-label">Amount to withdraw</label>
                                 <input type="number" name="amount" data-ng-model="withdrawal.amount"
                                            class="form-control"
-                                           id="amount" min="0" max="<% balance %>" placeholder="Amount to withdraw should be less or equal to current balance" required="">
+                                           id="amount" min="0" max="<% balance + referralBonus %>" placeholder="Amount to withdraw should be less or equal to current balance" required="">
                             </div>
                             <hr>
                             <div class="row">
@@ -90,8 +90,21 @@
                                 <span class="info-box-text">BTC</span>
                                 <span class="info-box-number" data-ng-bind="balance"></span>
                             </div>
+
                             <!-- /.info-box-content -->
                         </div>
+
+                        <div class="info-box">
+                            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Referral Bonus</span>
+                                <span class="info-box-number" data-ng-bind="referralBonus"></span>
+                            </div>
+
+                            <!-- /.info-box-content -->
+                        </div>
+
                         <!-- /.info-box -->
                     </div>
                 </div>

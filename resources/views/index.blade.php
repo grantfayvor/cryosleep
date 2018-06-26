@@ -108,6 +108,8 @@
                                             <button type="button" onclick="copyReferralCode()" class="btn btn-default">
                                                 <span class="fa fa-bookmark-o"></span>
                                             </button>
+                                            <input type="hidden" id="hiddenReferral" value="{{ $user->referral_code }}">
+                                            <input type="hidden" id="noOfReferrals" value="{{ $user->referrals }}">
                                         </div>
                                     </div>
                                     <!-- /.row -->
@@ -295,6 +297,11 @@
                             </ul>
                         </li>
                     @endif
+
+                    <li>
+                        <a href="javascript:void(0);" ui-sref="referrals" ui-sref-active="active">
+                            <i class="fa fa-map-o"></i> <span> Referrals</span></a>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -550,9 +557,10 @@
     <script src="dist/js/demo.js"></script>--}}
 
     <script>
+        var referralLink;
         $(function() {
             var referral = document.getElementById('referralCode');
-            referral.value = window.location.hostname + '/register?rf={{ $user->referral_code }}';
+            referral.value = referralLink = window.location.hostname + '/register?rf={{ $user->referral_code }}';
 //            document.getElementById('referralInput').value = referral.innerHTML;
         });
         function copyReferralCode() {

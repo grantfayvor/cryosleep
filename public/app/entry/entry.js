@@ -95,6 +95,11 @@ var cryptocoin = angular.module('app.crypto', ['ui.router']);
                     url: '/manage_users',
                     templateUrl: '/app/modules/user/view_users.html',
                     controller: 'UserController'
+                })
+                .state('referrals', {
+                    url: '/referrals',
+                    templateUrl: '/app/modules/referral/referral.html',
+                    controller: 'ReferralController'
                 });
 
         }

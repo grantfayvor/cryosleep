@@ -201,7 +201,7 @@
             }, function (response) {
                 window.location.href = response.data.url;
             }, function (response) {
-                AlertService.alertify('an error occurred while trying to generate the transfer url. please try again later');
+                AlertService.alertify('an error occurred while trying to generate the transfer url. please try again later', 'danger', 'Error');
             });
         };
 
@@ -238,10 +238,14 @@
             TransactionService.getConfirmedTransactions(function (response) {
                 $scope.balance = response.data.reduce(function (total, t) {
                     return total.amount + t.amount;
+                }, {
+                    amount: 0
                 });
+                var noOfReferrals = document.getElementById('noOfReferrals').value;
                 if (typeof $scope.balance == "object") {
                     $scope.balance = $scope.balance.amount;
                 }
+                $scope.referralBonus = (noOfReferrals * 0.05) * $scope.balance;
                 CryptoService.getUserAddress(function (resp) {
                     $scope.withdrawal.address = resp.data.address;
                 }, function (resp) {
