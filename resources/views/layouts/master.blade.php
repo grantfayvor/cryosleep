@@ -140,7 +140,7 @@
                                     <!-- /.mainnav -->
                                     <aside class="widget float-right">
                                         <div class="btn-click style2">
-                                            <a href="/login" class="flat-button">ACCOUNT AREA</a>
+                                            <a href="/home" class="flat-button">ACCOUNT AREA</a>
                                         </div>
                                     </aside>
                                 </div>

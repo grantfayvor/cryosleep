@@ -43167,10 +43167,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
             var confirmedAddress = window.sessionStorage.getItem("confirmed_address");
             if (!confirmedAddress ||  confirmedAddress == 'false') {
                 $urlRouterProvider.otherwise('/manage_crypto_account');
-                $urlRouterProvider.when('#!/', 'manage_crypto_account');
+                $urlRouterProvider.when('home#!/', 'manage_crypto_account');
             } else {
                 $urlRouterProvider.otherwise('/');
-                $urlRouterProvider.when('#!/', 'dashboard');
+                $urlRouterProvider.when('home#!/', 'dashboard');
             }
 
             $stateProvider

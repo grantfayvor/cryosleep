@@ -78,7 +78,13 @@ class TransactionController extends Controller
 
     public function getUserConfirmedTransactions(Request $request)
     {
-        return $this->userService->getUserConfirmedTransactions($request->user()->id);
+        $transactions = $this->userService->getUserConfirmedTransactions($request->user()->id);
+        $balance = 0;
+        for($i = 0; $i < count($transactions); $i++) {
+            $balance = $balance + $transactions[$i]->amount;
+        }
+        session(['current_balance' => $balance]);
+        return $transactions;
     }
 
     public function delete($id)

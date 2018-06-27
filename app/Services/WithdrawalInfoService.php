@@ -21,6 +21,12 @@ class WithdrawalInfoService {
     }
 
     public function create(WithdrawalInfoRequest $request) {
+        $currentBalance = (int) session('current_balance');
+        $noOfReferrals = $request->user()->referrals;
+        $referralBonus = ($noOfReferrals * 0.05) * $currentBalance;
+        if($request->amount > ($currentBalance + $referralBonus)) {
+            return response()->json(['message' => 'amount is less than your current balance', 'data' => $request->getValues()], 422);
+        }
         if (!$this->repository->create($request->getValues())) {
             return response()->json(['message' => 'the resource was not created', 'data' => $request->getValues()], 500);
         }
