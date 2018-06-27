@@ -106,7 +106,7 @@
                                             Refer members using &nbsp;
                                             <input type="text" id="referralCode" class="form-control" readonly>
                                             <button type="button" onclick="copyReferralCode()" class="btn btn-default">
-                                                <span class="fa fa-bookmark-o"></span>
+                                                <span class="fa fa-copy"></span>
                                             </button>
                                             <input type="hidden" id="hiddenReferral" value="{{ $user->referral_code }}">
                                             <input type="hidden" id="noOfReferrals" value="{{ $user->referrals }}">
