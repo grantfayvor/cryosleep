@@ -174,12 +174,12 @@
                                 <a href="javascript:void(0);" ui-sref="manage_crypto_account" ui-sref-active="active">
                                     <i class="fa fa-circle-o"></i> Manage Crypto Account</a>
                             </li>
-                            @if($user && $user->isAn('ADMIN'))
+                            {{--@if($user && $user->isAn('ADMIN'))
                             <li>
                                 <a href="javascript:void(0);" ui-sref="view_crypto_accounts" ui-sref-active="active">
                                     <i class="fa fa-circle-o"></i> View Crypto Accounts</a>
                             </li>
-                            @endif
+                            @endif--}}
                         </ul>
                     </li>
                     <li class="treeview">
