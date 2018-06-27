@@ -13,8 +13,8 @@ var cryptocoin = angular.module('app.crypto', ['ui.router']);
 
             var confirmedAddress = window.sessionStorage.getItem("confirmed_address");
             if (!confirmedAddress ||  confirmedAddress == 'false') {
-                $urlRouterProvider.otherwise('/new_crypto_account');
-                $urlRouterProvider.when('#!/', 'new_crypto_account');
+                $urlRouterProvider.otherwise('/manage_crypto_account');
+                $urlRouterProvider.when('#!/', 'manage_crypto_account');
             } else {
                 $urlRouterProvider.otherwise('/');
                 $urlRouterProvider.when('#!/', 'dashboard');
@@ -26,8 +26,8 @@ var cryptocoin = angular.module('app.crypto', ['ui.router']);
                     templateUrl: '/app/home.html',
                     controller: 'MainController'
                 })
-                .state('new_crypto_account', {
-                    url: '/new_crypto_account',
+                .state('manage_crypto_account', {
+                    url: '/manage_crypto_account',
                     templateUrl: '/app/modules/crypto/new_crypto_account.html',
                     controller: 'CryptoController'
                 })

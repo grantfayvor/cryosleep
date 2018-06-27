@@ -7,11 +7,20 @@
 
         var confirmedAddress = window.sessionStorage.getItem("confirmed_address");
         console.log('the confirmed address in crypto controller is ' + confirmedAddress);
-        if ($state.is('new_crypto_account') && (confirmedAddress == true || confirmedAddress == 'true')) {
-            $state.go('dashboard');
-        }
+        // if ($state.is('new_crypto_account') && (confirmedAddress == true || confirmedAddress == 'true')) {
+        //     $state.go('dashboard');
+        // }
         $scope.crypto = {};
         $scope.cryptoAccounts = [];
+
+        $scope.getUserAddress = function() {
+            CryptoService.getUserAddress(function (response) {
+                $scope.crypto.address = response.data.address;
+                $scope.changeAddress = $scope.crypto.address ? true : false;
+            }, function (response) {
+                AlertService.alertify(response.data && response.data.message, "danger");
+            });
+        };
 
         $scope.registerAddress = function () {
             CryptoService.create($scope.crypto, function (response) {

@@ -14,7 +14,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- jvectormap -->
-    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css"> -->
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -171,8 +171,8 @@
                         </a>
                         <ul class="treeview-menu">
                             <li>
-                                <a href="javascript:void(0);" ui-sref="new_crypto_account" ui-sref-active="active">
-                                    <i class="fa fa-circle-o"></i> New Crypto Account</a>
+                                <a href="javascript:void(0);" ui-sref="manage_crypto_account" ui-sref-active="active">
+                                    <i class="fa fa-circle-o"></i> Manage Crypto Account</a>
                             </li>
                             @if($user && $user->isAn('ADMIN'))
                             <li>

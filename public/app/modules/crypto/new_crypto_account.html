@@ -1,4 +1,4 @@
-<section class="content-header">
+<section class="content-header" data-ng-init="getUserAddress()">
     <h1>
         Register your bitcoincurrency account
     </h1>
@@ -30,8 +30,15 @@
                             <label for="address" class="col-sm-3 control-label">Public Address</label>
 
                             <div class="col-sm-9">
-                                <input type="text" name="address" data-ng-model="crypto.address" class="form-control"
+                                <input type="text" name="address" data-ng-disabled="changeAddress" data-ng-model="crypto.address" class="form-control"
                                        id="address" placeholder="bitcoin currency public address" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox col-sm-9 pull-right">
+                                <label>
+                                    <input type="checkbox" data-ng-model="changeAddress"> Update crypto address
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -39,7 +46,7 @@
                     <div class="box-footer">
                         <span>Register your bitcoin public address. <b style="color: red;">Never reveal your private address to anyone</b></span>
                         <hr>
-                        <button type="submit" class="btn btn-info pull-right">Submit</button>
+                        <button type="submit" class="btn btn-info pull-right">Create or Update</button>
                     </div>
                     <!-- /.box-footer -->
                 </form>
@@ -50,3 +57,13 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+
+<!-- <script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script> -->

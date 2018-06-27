@@ -43166,8 +43166,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
             var confirmedAddress = window.sessionStorage.getItem("confirmed_address");
             if (!confirmedAddress ||  confirmedAddress == 'false') {
-                $urlRouterProvider.otherwise('/new_crypto_account');
-                $urlRouterProvider.when('#!/', 'new_crypto_account');
+                $urlRouterProvider.otherwise('/manage_crypto_account');
+                $urlRouterProvider.when('#!/', 'manage_crypto_account');
             } else {
                 $urlRouterProvider.otherwise('/');
                 $urlRouterProvider.when('#!/', 'dashboard');
@@ -43179,8 +43179,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
                     templateUrl: '/app/home.html',
                     controller: 'MainController'
                 })
-                .state('new_crypto_account', {
-                    url: '/new_crypto_account',
+                .state('manage_crypto_account', {
+                    url: '/manage_crypto_account',
                     templateUrl: '/app/modules/crypto/new_crypto_account.html',
                     controller: 'CryptoController'
                 })
@@ -43454,11 +43454,20 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
         var confirmedAddress = window.sessionStorage.getItem("confirmed_address");
         console.log('the confirmed address in crypto controller is ' + confirmedAddress);
-        if ($state.is('new_crypto_account') && (confirmedAddress == true || confirmedAddress == 'true')) {
-            $state.go('dashboard');
-        }
+        // if ($state.is('new_crypto_account') && (confirmedAddress == true || confirmedAddress == 'true')) {
+        //     $state.go('dashboard');
+        // }
         $scope.crypto = {};
         $scope.cryptoAccounts = [];
+
+        $scope.getUserAddress = function() {
+            CryptoService.getUserAddress(function (response) {
+                $scope.crypto.address = response.data.address;
+                $scope.changeAddress = $scope.crypto.address ? true : false;
+            }, function (response) {
+                AlertService.alertify(response.data && response.data.message, "danger");
+            });
+        };
 
         $scope.registerAddress = function () {
             CryptoService.create($scope.crypto, function (response) {
