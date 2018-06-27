@@ -12,6 +12,8 @@ namespace App\Services;
 use App\Http\Requests\CryptoAccountRequest;
 use App\Repositories\CryptoAccountRepository;
 
+use Auth;
+
 class CryptoAccountService
 {
 
@@ -24,6 +26,10 @@ class CryptoAccountService
 
     public function create(CryptoAccountRequest $request)
     {
+        $authAttempt = Auth::attempt(['email' => $request->user()->email, 'password' => $request->password]);
+        if(!$authAttempt) {
+            return response()->json(['message' => 'invalid password'], 419);
+        }
         // $checkExistingAddress = $this->repository->getOneByParam('address', $request->address);
         $checkExistingUser = $this->getOneByParam('user_id', $request->user()->id);
         // if ($checkExistingAddress || $checkExistingUser) {

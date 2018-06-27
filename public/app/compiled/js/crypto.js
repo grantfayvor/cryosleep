@@ -43463,7 +43463,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         $scope.getUserAddress = function() {
             CryptoService.getUserAddress(function (response) {
                 $scope.crypto.address = response.data.address;
-                $scope.changeAddress = $scope.crypto.address ? true : false;
+                $scope.changeAddress = $scope.crypto.address ? false : false;
             }, function (response) {
                 AlertService.alertify(response.data && response.data.message, "danger");
             });
@@ -43471,6 +43471,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
         $scope.registerAddress = function () {
             CryptoService.create($scope.crypto, function (response) {
+                $('#passwordModal').modal('hide');
                 console.log(response);
                 AlertService.alertify(response.data && response.data.message, "info");
                 window.sessionStorage.setItem("confirmed_address", true);
@@ -43487,6 +43488,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
             }, function (response) {
                 console.log(response);
             });
+        };
+
+        $scope.openPasswordModal = function () {
+            $('#passwordModal').modal('show');
         };
 
     });

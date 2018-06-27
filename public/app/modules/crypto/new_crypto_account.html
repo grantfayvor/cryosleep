@@ -3,7 +3,10 @@
         Register your bitcoincurrency account
     </h1>
     <ol class="breadcrumb">
-        <li><a href="javascript:;" ui-sref="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>
+            <a href="javascript:;" ui-sref="dashboard">
+                <i class="fa fa-dashboard"></i> Home</a>
+        </li>
         <li class="active">bitcoin Currency account</li>
     </ol>
 </section>
@@ -21,17 +24,23 @@
             <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">Register bitcoin public address</h3>
+                    <section id="introduction">
+                            <!--<h2 class="page-header">Instruction</h2>-->
+                            <h6 class="lead" style="font-size: 15px!important;">
+                                Select Update crypto address checkbox to enable editing currency address.
+                            </h6>
+                        </section>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" data-ng-submit="registerAddress()">
+                <form class="form-horizontal" data-ng-submit="openPasswordModal()">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="address" class="col-sm-3 control-label">Public Address</label>
 
                             <div class="col-sm-9">
-                                <input type="text" name="address" data-ng-disabled="changeAddress" data-ng-model="crypto.address" class="form-control"
-                                       id="address" placeholder="bitcoin currency public address" required="">
+                                <input type="text" name="address" data-ng-disabled="!changeAddress" data-ng-model="crypto.address" class="form-control" id="address"
+                                    placeholder="bitcoin currency public address" required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -44,7 +53,9 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <span>Register your bitcoin public address. <b style="color: red;">Never reveal your private address to anyone</b></span>
+                        <span>Register your bitcoin public address.
+                            <b style="color: red;">Never reveal your private address to anyone</b>
+                        </span>
                         <hr>
                         <button type="submit" class="btn btn-info pull-right">Create or Update</button>
                     </div>
@@ -67,3 +78,42 @@
         });
     });
 </script> -->
+
+<!--preview modal-->
+<div class="example-modal">
+    <div class="modal" id="passwordModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="form-horizontal" data-ng-submit="registerAddress()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Enter your password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="todo-list">
+                            <li>
+                                <div class="row">
+                                    <div class="col-sm-1 col-xs-1"></div>
+                                    <div class="form-group col-sm-10 col-xs-10 text-center">
+                                        <input type="password" placeholder="Enter your password here" class="form-control" data-ng-model="crypto.password" required>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close
+                        </button>
+                        <button type="submit" class="btn btn-primary pull-right">Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>

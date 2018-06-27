@@ -16,7 +16,7 @@
         $scope.getUserAddress = function() {
             CryptoService.getUserAddress(function (response) {
                 $scope.crypto.address = response.data.address;
-                $scope.changeAddress = $scope.crypto.address ? true : false;
+                $scope.changeAddress = $scope.crypto.address ? false : true;
             }, function (response) {
                 AlertService.alertify(response.data && response.data.message, "danger");
             });
@@ -24,6 +24,7 @@
 
         $scope.registerAddress = function () {
             CryptoService.create($scope.crypto, function (response) {
+                $('#passwordModal').modal('hide');
                 console.log(response);
                 AlertService.alertify(response.data && response.data.message, "info");
                 window.sessionStorage.setItem("confirmed_address", true);
@@ -40,6 +41,10 @@
             }, function (response) {
                 console.log(response);
             });
+        };
+
+        $scope.openPasswordModal = function () {
+            $('#passwordModal').modal('show');
         };
 
     });
