@@ -308,11 +308,11 @@
                             ​‌“
                         </div>
                         <h1 class="cd-headline clip is-full-width">
-                            <span>2000+</span>
+                            <span>{{ $users }}</span>
                             <span class="cd-words-wrapper">
                                 <b class="is-visible"> Happy Clients</b>
                                 <b>Investors</b>
-                                <b>Managed Trades</b>
+                                {{--<b>Managed Trades</b>--}}
                             </span>
                         </h1>
                     </div>
@@ -422,19 +422,18 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-2 col-sm-6">
+                {{--<div class="col-lg-2 col-sm-6">
                     <div class="flat-counter style2 padding-another">
                         <div class="content-counter">
                             <div class="numb-count" data-to="10" data-speed="2000" data-waypoint-active="yes">10</div>
                             <div class="name-count">Days Active</div>
                         </div>
                     </div>
-                    <!-- /.flat-counter -->
-                </div>
+                </div>--}}
                 <div class="col-lg-2 col-sm-6">
                     <div class="flat-counter style2 padding-another">
                         <div class="content-counter">
-                            <div class="numb-count" data-to="10" data-speed="2000" data-waypoint-active="yes">10</div>
+                            <div class="numb-count" data-to="{{ $users }}" data-speed="2000" data-waypoint-active="yes">{{ $users }}</div>
                             <div class="name-count">Registered Users</div>
                         </div>
                     </div>
@@ -443,7 +442,7 @@
                 <div class="col-lg-2 col-sm-6">
                     <div class="flat-counter style2 padding-another">
                         <div class="content-counter">
-                            <div class="numb-count" data-to="10" data-speed="2000" data-waypoint-active="yes">10</div>
+                            <div class="numb-count" data-to="{{ $deposits }}" data-speed="2000" data-waypoint-active="yes">{{ $deposits }}</div>
                             <div class="name-count">Deposits</div>
                         </div>
                     </div>
@@ -452,7 +451,7 @@
                 <div class="col-lg-2 col-sm-6">
                     <div class="flat-counter style2 padding-another">
                         <div class="content-counter">
-                            <div class="numb-count" data-to="10" data-speed="2000" data-waypoint-active="yes">10</div>
+                            <div class="numb-count" data-to="{{ $withdrawals }}" data-speed="2000" data-waypoint-active="yes">{{ $withdrawals }}</div>
                             <div class="name-count">Withdrawals</div>
                         </div>
                     </div>

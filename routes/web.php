@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/',  function (){
-    return view('pages.home');
-})->name('test_home');
+Route::get('/',  'HomeController@home')->name('test_home');
 Route::get('test_about', function (){
     return view('pages.about');
 });
