@@ -115,22 +115,13 @@
                                 <div class="nav-wrap clearfix">
                                     <nav id="mainnav" class="mainnav style2 color-93a float-left">
                                         <ul class="menu">
-                                            <li><a href="/test_about">About Us</a>
-                                                <ul class="submenu">
-                                                    <li><a href="">Trading Methodologies</a></li>
-                                                    <li><a href="">Global Leading Brokers</a></li>
-                                                    <li><a href="">Funds Management</a></li>
-                                                    <li><a href="">Safety of funds</a></li>
-                                                </ul>
-                                                <!-- /.submenu -->
-                                            </li>
+                                            <li><a href="/test_about">About Us</a></li>
                                             <li><a href="/get_started">Getting Started</a></li>
                                             <li><a href="/get_started">Terms & Conditions</a></li>
 
                                             <li><a href="#">Support</a>
                                                 <ul class="submenu right">
                                                     <li><a href="/contact_us">Contact Us</a></li>
-                                                    <li><a href="/faq">FAQs</a></li>
                                                 </ul>
                                                 <!-- /.submenu -->
                                             </li>
