@@ -74,7 +74,7 @@
                     <div class="col-lg-5">
                         <div class="wrap-top reponsive-none clearfix">
                             <ul class="social-links color-white float-right margin-left25 margin-top14">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://facebook.com/thecryptoflare"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li class="google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
