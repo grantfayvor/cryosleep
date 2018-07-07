@@ -46,7 +46,7 @@
                             <ul>
                                 <li>Calls Only</li>
                                 <li>Email: info@cryptoflare.io</li>
-                                <li>Phone: 258-556-189</li>
+                                <li>Phone: +1 321-832-8528</li>
                             </ul>
                         </div>
                     </div>
