@@ -257,7 +257,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <ul class="social-links style2 text-right">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://facebook.com/thecryptoflare"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <!-- <li><a href="#"><i class="fa fa-vimeo"></i></a></li> -->
                         <li><a href="#"><i class="fa fa-instagram"></i></a></li>

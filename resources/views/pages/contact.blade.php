@@ -22,11 +22,11 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="info-box text-center">
-                            <h3>France</h3>
+                            <h3>United States</h3>
                             <ul>
-                                <li>John Doe, 123 Main St Chicago, IL 60626</li>
+                                <li>WhatsApp Only</li>
                                 <li>Email: info@cryptoflare.io</li>
-                                <li>Phone: 258-556-189</li>
+                                <li>Phone: +1 (570) 203-1945</li>
                             </ul>
                         </div>
                     </div>
@@ -34,17 +34,17 @@
                         <div class="info-box text-center">
                             <h3>United States</h3>
                             <ul>
-                                <li>John Doe, 123 Main St Chicago, IL 60626</li>
+                                <li>Calls Only</li>
                                 <li>Email: info@cryptoflare.io</li>
-                                <li>Phone: 258-556-189</li>
+                                <li>Phone: +1 520-286-8842</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="info-box text-center">
-                            <h3>Viet Nam</h3>
+                            <h3>United States</h3>
                             <ul>
-                                <li>John Doe, 123 Main St Chicago, IL 60626</li>
+                                <li>Calls Only</li>
                                 <li>Email: info@cryptoflare.io</li>
                                 <li>Phone: 258-556-189</li>
                             </ul>
