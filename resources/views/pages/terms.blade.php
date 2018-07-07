@@ -31,13 +31,13 @@
                 <div class="col-12">
                     <div class="background-white px-3 mt-6 px-0 py-5 px-lg-5 radius-secondary">
                         <h5>General</h5>
-                        <p class="mt-3">These rules are official and the public offer of bitline.club - Your Profitable Operator, acting in accordance with the legislation of Great Britain, on the one hand, and the individual investor. This is equivalent to the conclusion of the Agreement in accordance with international law.
+                        <p class="mt-3">These rules are official and the public offer of Cryptoflare - Your Profitable Operator, acting in accordance with the legislation of Great Britain, on the one hand, and the individual investor. This is equivalent to the conclusion of the Agreement in accordance with international law.
                             <br><br>
-                            These rules shall enter into force on the date of registration of the Investor on the website of the program bitline.club - Your Profitable Operator and his acceptance of the terms and conditions. If you disagree with these terms and conditions or any part of these terms and conditions, you must not use this website.
+                            These rules shall enter into force on the date of registration of the Investor on the website of the program Cryptoflare - Your Profitable Operator and his acceptance of the terms and conditions. If you disagree with these terms and conditions or any part of these terms and conditions, you must not use this website.
                             <br><br>
                             Any individual or company from any country may open an account with us. You must be at least 18 years of age to use this website.
                             <br><br>
-                            You agree that all information, interactions, materials coming from bitline.club - Your Profitable Operator are unsolicited and must be kept private, confidential and protected from any disclosure.
+                            You agree that all information, interactions, materials coming from Cryptoflare - Your Profitable Operator are unsolicited and must be kept private, confidential and protected from any disclosure.
                             <br><br>
                             Besides, the information, interactions and materials present herein are not to be regarded as an offer, nor a solicitation for investments in any jurisdiction which deems non-public offers or solicitations unlawful, nor to any person to whom it will be unlawful to make such offer or solicitation.
                             <br><br>
@@ -51,7 +51,7 @@
                         </p>
                         <h5>Investment Conditions</h5>
                         <p class="mt-3">
-                            Each deposit is considered to be a private transaction between bitline.club - Your Profitable Operator and its Member. Members perform all financial transactions solely at their own discretion and their own risk. The Investor personally decides whether or not to invest and how much to invest. All accruals in the Personal Account are made according to the chosen investment package. The Investor has the right to freely dispose of the funds that are on his personal account. The Investor can make a deposit with only help of electronic payment systems used by the Company.
+                            Each deposit is considered to be a private transaction between Cryptoflare - Your Profitable Operator and its Member. Members perform all financial transactions solely at their own discretion and their own risk. The Investor personally decides whether or not to invest and how much to invest. All accruals in the Personal Account are made according to the chosen investment package. The Investor has the right to freely dispose of the funds that are on his personal account. The Investor can make a deposit with only help of electronic payment systems used by the Company.
                         </p>
                         <h5>Refund Policy</h5>
                         <p class="mt-3">

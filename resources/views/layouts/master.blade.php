@@ -117,7 +117,7 @@
                                         <ul class="menu">
                                             <li><a href="/test_about">About Us</a></li>
                                             <li><a href="/get_started">Getting Started</a></li>
-                                            <li><a href="/get_started">Terms & Conditions</a></li>
+                                            <li><a href="/terms">Terms & Conditions</a></li>
 
                                             <li><a href="#">Support</a>
                                                 <ul class="submenu right">
