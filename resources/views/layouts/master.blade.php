@@ -66,7 +66,7 @@
                         <div class="wrap-top margin-top9 clearfix">
                             <ul class="flat-information style2">
                                 <li><i class="fa fa-envelope"></i><a href="#">info@cryptoflare.io</a></li>
-                                <li><i class="fa fa-phone"></i><a href="#">+1 631-637-7717</a></li>
+                                <li><i class="fa fa-phone"></i><a href="#">+1 321-832-8528</a></li>
                             </ul>
                         </div>
                     </div>
