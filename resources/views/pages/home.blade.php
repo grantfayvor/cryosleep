@@ -474,7 +474,27 @@
             <div class="blog-carosuel-wrap2">
                 <div class="blog-shortcode post-list">
                     <table>
-                        {{dd($transactions)}}
+                        <thead>
+                        <tr>
+                            <td>Time Stamp</td>
+                            <td>Amount</td>
+                            <td>Address</td>
+                            <td>Plan</td>
+                            <td>User</td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($transactions as $transaction)
+                            <tr>
+                                <td>{{$transaction->created_at}}</td>
+                                <td>{{$transaction->amount}}</td>
+                                <td>{{$transaction->user->crypto_account->address}}</td>
+                                <td>{{$transaction->transaction_plan->name}}</td>
+                                <td>{{$transaction->user->username}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
