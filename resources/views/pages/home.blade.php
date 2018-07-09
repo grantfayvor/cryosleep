@@ -473,7 +473,7 @@
             </div>
             <div class="blog-carosuel-wrap2">
                 <div class="blog-shortcode post-list">
-                    <table>
+                    <table class="table table-inverse">
                         <thead>
                         <tr>
                             <td>Time Stamp</td>
