@@ -32,8 +32,8 @@ class HomeController extends Controller
     public function home(Request $request, cointpayment_log_trxRepository $transactionRepo, 
                             UserRepository $userRepo, WithdrawalInfoRepository $withdrawalRepo)
     {
-        $noOfDeposits = $transactionRepo->getAll()->count();
         $transactions = $transactionRepo->getAll();
+        $noOfDeposits = $transactions->count();
         $noOfUsers = $userRepo->getAll()->count();
         $noOfWithdrawals = $withdrawalRepo->getAll()->count();
         return view('pages.home', ['deposits' => $noOfDeposits, 'users' => $noOfUsers, 'withdrawals' => $noOfWithdrawals, 'transactions' => $transactions]);
