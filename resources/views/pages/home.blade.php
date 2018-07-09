@@ -474,7 +474,7 @@
             <div class="blog-carosuel-wrap2">
                 <div class="blog-shortcode post-list">
                     <table>
-                        {{$transactions}}
+                        {{dd($transactions)}}
                     </table>
                 </div>
             </div>
