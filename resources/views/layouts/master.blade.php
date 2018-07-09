@@ -165,7 +165,7 @@
                         <p>Cryptoflare Ltd. is a fully-registered crypto trading and investment advisory company.</p>
                         <ul class="flat-information">
                             <li><i class="fa fa-map-marker"></i><a href="#">450 Lexington Avenue, New York, NY 10017</a></li>
-                            <li><i class="fa fa-phone"></i><a href="#">+1 631-637-7717</a></li>
+                            <li><i class="fa fa-phone"></i><a href="#">+1 321-832-8528</a></li>
                             <li><i class="fa fa-envelope"></i><a href="#">info@cryptoflare.io</a></li>
                         </ul>
                     </div>

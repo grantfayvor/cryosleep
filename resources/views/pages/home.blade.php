@@ -262,42 +262,42 @@
             </div>
         </div>
     </section>
-    <section class="section-maps-form style2 parallax parallax4">
-        <div class="section-overlay style2"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="formrequest2 style2 padding-right30">
-                        <div class="divider sh94"></div>
-                        <div class="title-section style2 titlesize48 color-white">
-                            <h1 class="title"><span>Request</span> a call back.</h1>
-                            <div class="sub-title">
-                                Whatever specific financial, personal or investment opportunities you’re looking for, be sure that the free consultation with one of our experts will sway you to signup!
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="wrap-formrequest padding-lr100">
-                        <form id="contactform" class="contactform wrap-form style3 clearfix" method="post" action="./contact/contact-process2.php" novalidate="novalidate">
-                            <span class="title-form">Select a time to talk</span>
-                            <span class="flat-input flat-select">
-                                <select>
-                                    <option value="">Weekday Morning</option>
-                                    <option value="">Weekday Evening</option>
-                                    <option value="">Weekend Morning</option>
-                                    <option value="">Weekend Evening</option>
-                                </select>
-                            </span>
-                            <span class="flat-input"><input name="name" type="text" value="" placeholder="Your Name:*" required="required"></span>
-                            <span class="flat-input"><input name="phone" type="text" value="" placeholder="Phone Number:*" required="required"></span>
-                            <span class="flat-input"><button name="submit" type="submit" class="flat-button" id="submit" title="Submit now">SUBMIT<i class="fa fa-angle-double-right"></i></button></span>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{--<section class="section-maps-form style2 parallax parallax4">--}}
+        {{--<div class="section-overlay style2"></div>--}}
+        {{--<div class="container">--}}
+            {{--<div class="row">--}}
+                {{--<div class="col-lg-6">--}}
+                    {{--<div class="formrequest2 style2 padding-right30">--}}
+                        {{--<div class="divider sh94"></div>--}}
+                        {{--<div class="title-section style2 titlesize48 color-white">--}}
+                            {{--<h1 class="title"><span>Request</span> a call back.</h1>--}}
+                            {{--<div class="sub-title">--}}
+                                {{--Whatever specific financial, personal or investment opportunities you’re looking for, be sure that the free consultation with one of our experts will sway you to signup!--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-lg-6">--}}
+                    {{--<div class="wrap-formrequest padding-lr100">--}}
+                        {{--<form id="contactform" class="contactform wrap-form style3 clearfix" method="post" action="./contact/contact-process2.php" novalidate="novalidate">--}}
+                            {{--<span class="title-form">Select a time to talk</span>--}}
+                            {{--<span class="flat-input flat-select">--}}
+                                {{--<select>--}}
+                                    {{--<option value="">Weekday Morning</option>--}}
+                                    {{--<option value="">Weekday Evening</option>--}}
+                                    {{--<option value="">Weekend Morning</option>--}}
+                                    {{--<option value="">Weekend Evening</option>--}}
+                                {{--</select>--}}
+                            {{--</span>--}}
+                            {{--<span class="flat-input"><input name="name" type="text" value="" placeholder="Your Name:*" required="required"></span>--}}
+                            {{--<span class="flat-input"><input name="phone" type="text" value="" placeholder="Phone Number:*" required="required"></span>--}}
+                            {{--<span class="flat-input"><button name="submit" type="submit" class="flat-button" id="submit" title="Submit now">SUBMIT<i class="fa fa-angle-double-right"></i></button></span>--}}
+                        {{--</form>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</section>--}}
 
     <section class="flat-row section-testimonials2 padding3">
         <div class="container">
@@ -525,7 +525,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="flat-client" data-item="5" data-nav="false" data-dots="false" data-auto="false">
-                        <div class="client"><img src="/frontend/images/clients/1.png" alt="image"></div>
+                        <div class="client"><img src="/frontend/images/clients/1.jpg" alt="image"></div>
                         <div class="client"><img src="/frontend/images/clients/2.png" alt="image"></div>
                         <div class="client"><img src="/frontend/images/clients/3.png" alt="image"></div>
                         <div class="client"><img src="/frontend/images/clients/4.png" alt="image"></div>
