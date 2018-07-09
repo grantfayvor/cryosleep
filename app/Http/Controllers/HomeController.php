@@ -33,9 +33,10 @@ class HomeController extends Controller
                             UserRepository $userRepo, WithdrawalInfoRepository $withdrawalRepo)
     {
         $noOfDeposits = $transactionRepo->getAll()->count();
+        $transactions = $transactionRepo->getAll();
         $noOfUsers = $userRepo->getAll()->count();
         $noOfWithdrawals = $withdrawalRepo->getAll()->count();
-        return view('pages.home', ['deposits' => $noOfDeposits, 'users' => $noOfUsers, 'withdrawals' => $noOfWithdrawals]);
+        return view('pages.home', ['deposits' => $noOfDeposits, 'users' => $noOfUsers, 'withdrawals' => $noOfWithdrawals, 'transactions' => $transactions]);
     }
 
     public function about (Request $request)

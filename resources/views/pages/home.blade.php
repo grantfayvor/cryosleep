@@ -467,54 +467,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="title-section text-center">
-                        <h1 class="title">Latest News</h1>
+                        <h1 class="title">Transaction Statistics</h1>
                     </div>
                 </div>
             </div>
             <div class="blog-carosuel-wrap2">
                 <div class="blog-shortcode post-list">
-                    <article class="entry clearfix">
-                        <div class="entry-border clearfix">
-                            <div class="featured-post">
-                                <a href="services-details.html"> <img src="/frontend/images/blog/ls1.jpg" alt="image"></a>
-                            </div>
-                            <!-- /.feature-post -->
-                            <div class="content-post">
-                                <span class="category">News &amp; Analysis</span>
-                                <h2 class="title-post"><a href="https://www.dailyfx.com/forex/fundamental/daily_briefing/session_briefing/daily_fundamentals/2018/04/05/us-dollar-catches-a-bid-ahead-of-non-farm-payrolls-nfp-srepstans.html">US Dollar Catches a Bid Ahead of Non-Farm Payrolls (NFP)</a></h2>
-                                <div class="meta-data style2 clearfix">
-                                    <ul class="meta-post clearfix">
-                                        <li class="day-time">
-                                            <span>5 April 2018</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /.contetn-post -->
-                        </div>
-                        <!-- /.entry-border -->
-                    </article>
-                    <article class="entry clearfix">
-                        <div class="entry-border clearfix">
-                            <div class="featured-post">
-                                <a href="services-details.html"> <img src="/frontend/images/blog/ls2.jpg" alt="image"></a>
-                            </div>
-                            <!-- /.feature-post -->
-                            <div class="content-post">
-                                <span class="category">Commodities</span>
-                                <h2 class="title-post"><a href="https://www.dailyfx.com/forex/fundamental/daily_briefing/daily_pieces/commodities/2018/03/30/Crude-Oil-Gold-Prices-Positioned-for-Weakness-Into-Holiday-Lull.html">Crude Oil, Gold Prices Positioned for Weakness</a></h2>
-                                <div class="meta-data style2 clearfix">
-                                    <ul class="meta-post clearfix">
-                                        <li class="day-time">
-                                            <span>30 March 2018</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /.contetn-post -->
-                        </div>
-                        <!-- /.entry-border -->
-                    </article>
+                    <table>
+                        {{$transactions}}
+                    </table>
                 </div>
             </div>
         </div>
