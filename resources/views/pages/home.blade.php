@@ -508,8 +508,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="flat-client" data-item="5" data-nav="false" data-dots="false" data-auto="false">
-                        <div class="client"><img src="/frontend/images/clients/1.png" alt="image"></div>
-                        <div class="client"><img src="/frontend/images/clients/2.png" alt="image"></div>
+                        <div class="client"><img src="/frontend/images/clients/6.png" alt="image"></div>
+                        <div class="client"><img src="/frontend/images/clients/7.png" alt="image"></div>
                         <div class="client"><img src="/frontend/images/clients/3.png" alt="image"></div>
                         <div class="client"><img src="/frontend/images/clients/4.png" alt="image"></div>
                         <div class="client"><img src="/frontend/images/clients/5.png" alt="image"></div>
