@@ -471,15 +471,16 @@
                     </div>
                 </div>
             </div>
-            <div class="blog-carosuel-wrap2">
-                <div class="blog-shortcode post-list">
+            <div class="row">
+                <div class="col-md-12">
                     <table class="table table-inverse">
                         <thead>
                         <tr>
                             <td>Time Stamp</td>
                             <td>Amount</td>
                             <td>Address</td>
-                            <td>Plan</td>
+                            <td>Transaction Plan</td>
+                            <td>Transaction Type</td>
                             <td>User</td>
 
                         </tr>
@@ -491,6 +492,7 @@
                                 <td>{{$transaction->amount}}</td>
                                 <td>{{$transaction->user->crypto_account->address}}</td>
                                 <td>{{$transaction->transaction_plan->name}}</td>
+                                <td>{{$transaction->transaction_type->name}}</td>
                                 <td>{{$transaction->user->username}}</td>
                             </tr>
                         @endforeach
