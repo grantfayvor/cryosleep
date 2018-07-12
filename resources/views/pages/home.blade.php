@@ -491,7 +491,7 @@
                             <tr>
                                 <td>{{$transaction->created_at}}</td>
                                 <td>{{$transaction->amount ?? $transaction->amount_to_pay}}</td>
-                                <td>{{$transaction->payment_address}}</td>
+                                {{--<td>{{$transaction->payment_address}}</td>--}}
                                 {{--<td><script> document.write(payload.transaction_plan_name); </script></td>--}}
                                 <td><script> document.write(payload.transaction_type_name); </script></td>
                                 <td>{{$transaction->user->username}}</td>
