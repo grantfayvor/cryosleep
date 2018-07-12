@@ -46,7 +46,7 @@ class HomeController extends Controller
             $typeId = $transaction->payload->transaction_type_id ?: $transaction->payload->details->transaction_type_id;
             //$planId = $transaction->payload->transaction_plan_id ?: $transaction->payload->details->transaction_plan_id;
             $type = $typeService->getById($typeId);
-            $plan = $planService->getById($planId);
+            //$plan = $planService->getById($planId);
             $transaction->transaction_type = $type;
             $transaction->transaction_plan = $plan;
             if(preg_match('/deposit/i', $type->name)) {
