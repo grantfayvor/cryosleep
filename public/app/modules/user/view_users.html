@@ -3,7 +3,10 @@
         Users
     </h1>
     <ol class="breadcrumb">
-        <li><a href="javascript:;" ui-sref="dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>
+            <a href="javascript:;" ui-sref="dashboard">
+                <i class="fa fa-dashboard"></i> Home</a>
+        </li>
         <li class="active">manage users</li>
     </ol>
 </section>
@@ -45,16 +48,32 @@
                             <th>Actions</th>
                         </tr>
                         <tr data-ng-repeat="user in users | filter : tableSearch">
-                            <td><span data-ng-bind="$index + 1"></span></td>
-                            <td><span data-ng-bind="user.full_name"></span></td>
-                            <td><span data-ng-bind="user.email"></span></td>
-                            <td><span data-ng-bind="user.referrals"></span></td>
+                            <td>
+                                <span data-ng-bind="$index + 1"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="user.full_name"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="user.email"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="user.referrals"></span>
+                            </td>
                             <!--<td><span data-ng-bind="user.totalDeposits"></span></td>-->
                             <!--<td><span data-ng-bind="user.totalWithdrawals"></span></td>-->
                             <!--<td><span data-ng-bind="user.totalProfit"></span></td>-->
                             <td>
-                                <button type="button" class="btn btn-sm btn-info" data-ng-click="editUser(user)">Edit User &nbsp; <i class="fa fa-circle-o"></i></button>
-                                <button type="button" data-ng-click="deleteUser(user.id)" class="btn btn-sm btn-danger">Delete &nbsp; <i class="fa fa-trash"></i> </button> </td>
+                                <button type="button" class="btn btn-sm btn-danger" data-ng-click="showPaymentModal(user)">Pay User &nbsp;
+                                    <i class="fa fa-money"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-info" data-ng-click="editUser(user)">Edit User &nbsp;
+                                    <i class="fa fa-circle-o"></i>
+                                </button>
+                                <button type="button" data-ng-click="deleteUser(user.id)" class="btn btn-sm btn-danger">Delete &nbsp;
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -67,12 +86,46 @@
 <!-- /.content -->
 
 <div class="example-modal">
+    <div class="modal" id="payModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Pay Modal</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12" style="margin: auto;padding-top: 4px;">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="amount" class="control-label">Amount</label>
+                                <input type="number" id="amount" data-ng-model="payment.amount" class="form-control" required>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close
+                    </button>
+                    <button type="button" class="btn btn-primary pull-right" data-ng-click="generateWithdrawalURL()">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+<div class="example-modal">
     <div class="modal" id="roleModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title">Edit User Role</h4>
                 </div>
                 <div class="modal-body">
@@ -83,8 +136,7 @@
                                     Full Name
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
-                                                <input type="text" class="form-control"
-                                                      data-ng-model="user.full_name">
+                                    <input type="text" class="form-control" data-ng-model="user.full_name">
                                 </div>
                             </div>
                         </li>
@@ -94,8 +146,7 @@
                                     Email
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
-                                                <input type="text" class="form-control"
-                                                      data-ng-model="user.email">
+                                    <input type="text" class="form-control" data-ng-model="user.email">
                                 </div>
                             </div>
                         </li>
@@ -105,8 +156,7 @@
                                     Current Role
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
-                                                <span class="badge badge-info"
-                                                      data-ng-bind="user.roleName"></span>
+                                    <span class="badge badge-info" data-ng-bind="user.roleName"></span>
                                 </div>
                             </div>
                         </li>
@@ -116,12 +166,12 @@
                                     Role
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
-                                                <select class="form-control"
-                                                        data-ng-model="user.role"
-                                                        data-ng-selected="role.name == user.roleName">
-                                                        <!--data-ng-change="changeRole()">-->
-                                                    <option value="<% role.id %>" data-ng-repeat="role in roles"><% role.name %></option>
-                                                </select>
+                                    <select class="form-control" data-ng-model="user.role" data-ng-selected="role.name == user.roleName">
+                                        <!--data-ng-change="changeRole()">-->
+                                        <option value="<% role.id %>" data-ng-repeat="role in roles">
+                                            <% role.name %>
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </li>

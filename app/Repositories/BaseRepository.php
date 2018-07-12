@@ -58,7 +58,7 @@ abstract class BaseRepository
 
     public function getOneByParam($param, $value)
     {
-        return $this->model->where($param, $value)->first();
+        return $this->model->where($param, "like", "%". $value . "%")->first();
     }
 
 }

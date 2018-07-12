@@ -41,6 +41,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
     Route::delete('/crypto/{id}', 'CryptoAccountController@delete')->middleware('admin');
     Route::get('/crypto/address/user', 'CryptoAccountController@getUserAddress');
     Route::get('/crypto/address/confirm', 'CryptoAccountController@confirmAddress');
+    Route::get('/crypto/address/get_selected', 'CryptoAccountController@getBySelectedUser');
 
     Route::get('/transaction', 'TransactionController@getAll')->middleware('admin');
     Route::post('/transaction', 'TransactionController@create');

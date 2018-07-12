@@ -50,6 +50,11 @@ class CryptoAccountController extends Controller
         return response()->json($this->service->getOneByParam('user_id', $request->user()->id));
     }
 
+    public function getBySelectedUser(Request $request)
+    {
+        return response()->json($this->service->getOneByParam('user_id', $request->userId));
+    }
+
     public function delete($id)
     {
         return $this->service->delete($id);
