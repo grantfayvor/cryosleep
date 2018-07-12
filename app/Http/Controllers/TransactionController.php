@@ -29,6 +29,11 @@ class TransactionController extends Controller
         $this->userService = $userService;
     }
 
+    public function testTransactionWithDummyData(Request $request)
+    {
+        return $this->service->testTransactionWithDummyData($request);
+    }
+
     public function generatePaymentURL(TransactionRequest $request)
     {
         $transactionType = $this->transactionTypeService->getOneByParam('name', 'Deposit');

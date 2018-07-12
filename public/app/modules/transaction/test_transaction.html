@@ -1,0 +1,94 @@
+<section class="content-header">
+    <h1>
+        Test transaction with dummy data
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="javascript:;" ui-sref="dashboard">
+                <i class="fa fa-dashboard"></i> Home</a>
+        </li>
+        <li class="active">test transaction</li>
+    </ol>
+</section>
+
+<section>
+    <div class="col-sm-6 col-xs-6 pull-right" id="alert"></div>
+</section>
+
+<!-- Main content -->
+<section class="content" data-ng-init="testTransactions()">
+
+    <div class="row">
+        <div class="col-md-8" style="margin:auto;margin-right: 20%;margin-left: 20%;">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Test Transaction</h3>
+                </div>
+                <form class="form-horizontal" data-ng-submit="submitTestTransaction()">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="userId" class="col-sm-3 control-label">User</label>
+
+                            <div class="col-sm-9">
+                                <select id="userId" class="form-control" data-ng-model="transaction.user_id" data-ng-options="user.id as user.username for user in users"
+                                    required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payment_id" class="col-sm-3 control-label">Payment Id</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="payment_id" data-ng-model="transaction.payment_id" class="form-control" id="payment_id" placeholder="Payment Id"
+                                    required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payment_address" class="col-sm-3 control-label">Payment Address</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" data-ng-model="transaction.payment_address" class="form-control" id="payment_address" placeholder="Payment Address"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount" class="col-sm-3 control-label">Amount</label>
+
+                            <div class="col-sm-9">
+                                <input type="number" data-ng-model="transaction.amount" class="form-control" id="amount" placeholder="Transaction Amount"
+                                    required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="transaction_type_id" class="col-sm-3 control-label">Transaction Type</label>
+
+                            <div class="col-sm-9">
+                                <select id="transaction_type_id" class="form-control" data-ng-model="transaction.transaction_type_id" data-ng-options="transactionType.id as transactionType.name for transactionType in transactionTypes"
+                                    required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="transaction_plan_id" class="col-sm-3 control-label">Transaction Plan</label>
+
+                            <div class="col-sm-9">
+                                <select id="transaction_plan_id" class="form-control" data-ng-model="transaction.transaction_plan_id" data-ng-options="transactionPlan.id as transactionPlan.name for transactionPlan in transactionPlans"
+                                    required>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-right">Submit</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

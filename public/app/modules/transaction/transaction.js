@@ -234,6 +234,32 @@
             });
         };
 
+        $scope.getUsers = function () {
+            TransactionService.getUsers(function(response) {
+                $scope.users = response.data;
+            }, function(response) {
+                console.log(response);
+            });
+        };
+
+        $scope.testTransactions = function () {
+            $scope.getTransactionPlans();
+            $scope.getTransactionTypes();
+            $scope.getUsers();
+        };
+
+        $scope.submitTestTransaction = function () {
+            $scope.transaction.payload = JSON.stringify({
+                transaction_plan_id: $scope.transaction.transaction_plan_id,
+                transaction_type_id: $scope.transaction.transaction_type_id
+            });
+            delete $scope.transaction.transaction_plan_id;
+            delete $scope.transaction.transaction_type_id;
+            TransactionService.submitTestTransaction($scope.transaction, function (response) {
+                AlertService.alertify('dummy transaction was successfully created', 'info', 'Success');
+            });
+        };
+
         $scope.getConfirmedTransactions = function () {
             TransactionService.getConfirmedTransactions(function (response) {
                 $scope.balance = response.data.reduce(function (total, t) {
@@ -331,7 +357,7 @@
         };
     });
 
-    app.service('TransactionService', function (APIService, transactionURL) {
+    app.service('TransactionService', function (APIService, transactionURL, userURL) {
 
         this.create = function (details, successHandler, errorHandler) {
             APIService.post(transactionURL, details, successHandler, errorHandler);
@@ -379,6 +405,14 @@
 
         this.createCallbackAddressForTransfer = function (details, successHandler, errorHandler) {
             APIService.post('/coinpayment/ajax/callback_address', details, successHandler, errorHandler);
+        };
+
+        this.getUsers = function (successHandler, errorHandler) {
+            APIService.get(userURL, successHandler, errorHandler);
+        };
+
+        this.submitTestTransaction = function (details, successHandler, errorHandler) {
+            APIService.post('/api/transaction/test/create', details, successHandler, errorHandler);
         };
 
     });

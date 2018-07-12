@@ -53,6 +53,12 @@ class TransactionService
         return response()->json(['url' => CoinPayment::url_payload($transaction)]);
     }
 
+    public function testTransactionWithDummyData(Request $request)
+    {
+        $request->payload = json_encode($request->payload);
+        return $this->coinRepository->create($request->all());
+    }
+
     public function generateWithdrawalURL(TransactionRequest $request)
     {
         $transaction['amountTotal'] = $request->amount_usd;

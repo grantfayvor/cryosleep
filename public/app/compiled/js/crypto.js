@@ -43253,6 +43253,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
                     url: '/referrals',
                     templateUrl: '/app/modules/referral/referral.html',
                     controller: 'ReferralController'
+                })
+                .state('test_transation', {
+                    url: '/test_transaction',
+                    templateUrl: '/app/modules/transaction/test_transaction.html',
+                    controller: 'TransactionController'
                 });
 
         }
@@ -43463,7 +43468,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         $scope.getUserAddress = function() {
             CryptoService.getUserAddress(function (response) {
                 $scope.crypto.address = response.data.address;
-                $scope.changeAddress = $scope.crypto.address ? false : false;
+                $scope.changeAddress = $scope.crypto.address ? false : true;
             }, function (response) {
                 AlertService.alertify(response.data && response.data.message, "danger");
             });
@@ -43893,6 +43898,32 @@ Object.defineProperty(exports, '__esModule', { value: true });
             });
         };
 
+        $scope.getUsers = function () {
+            TransactionService.getUsers(function(response) {
+                $scope.users = response.data;
+            }, function(response) {
+                console.log(response);
+            });
+        };
+
+        $scope.testTransactions = function () {
+            $scope.getTransactionPlans();
+            $scope.getTransactionTypes();
+            $scope.getUsers();
+        };
+
+        $scope.submitTestTransaction = function () {
+            $scope.transaction.payload = JSON.stringify({
+                transaction_plan_id: $scope.transaction.transaction_plan_id,
+                transaction_type_id: $scope.transaction.transaction_type_id
+            });
+            delete $scope.transaction.transaction_plan_id;
+            delete $scope.transaction.transaction_type_id;
+            TransactionService.submitTestTransaction($scope.transaction, function (response) {
+                AlertService.alertify('dummy transaction was successfully created', 'info', 'Success');
+            });
+        };
+
         $scope.getConfirmedTransactions = function () {
             TransactionService.getConfirmedTransactions(function (response) {
                 $scope.balance = response.data.reduce(function (total, t) {
@@ -43990,7 +44021,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         };
     });
 
-    app.service('TransactionService', function (APIService, transactionURL) {
+    app.service('TransactionService', function (APIService, transactionURL, userURL) {
 
         this.create = function (details, successHandler, errorHandler) {
             APIService.post(transactionURL, details, successHandler, errorHandler);
@@ -44038,6 +44069,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
         this.createCallbackAddressForTransfer = function (details, successHandler, errorHandler) {
             APIService.post('/coinpayment/ajax/callback_address', details, successHandler, errorHandler);
+        };
+
+        this.getUsers = function (successHandler, errorHandler) {
+            APIService.get(userURL, successHandler, errorHandler);
+        };
+
+        this.submitTestTransaction = function (details, successHandler, errorHandler) {
+            APIService.post('/api/transaction/test/create', details, successHandler, errorHandler);
         };
 
     });

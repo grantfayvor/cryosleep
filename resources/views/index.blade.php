@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cryosleep | Dashboard</title>
+    <title>Cryptoflare | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -69,7 +69,7 @@
                 </span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg">
-                    <b>Cryosleep</b>
+                    <b>Cryptoflare</b>
                 </span>
             </a>
 
@@ -302,6 +302,13 @@
                         <a href="javascript:void(0);" ui-sref="referrals" ui-sref-active="active">
                             <i class="fa fa-map-o"></i> <span> Referrals</span></a>
                     </li>
+
+                    @if($user && $user->isAn('ADMIN'))
+                    <li>
+                        <a href="javascript:void(0);" ui-sref="test_transation" ui-sref-active="active">
+                            <i class="fa fa-book"></i> <span> Test Transactions</span></a>
+                    </li>
+                    @endif
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -320,7 +327,7 @@
             </div>--}}
             <strong>Copyright &copy; 2018
                 <?php echo Date('Y') == 2018 ? '' : '-' . Date('Y'); ?>
-                <a href="/">Cryosleep</a>.</strong> All rights reserved.
+                <a href="/">Cryptoflare</a>.</strong> All rights reserved.
         </footer>
 
         <!-- Control Sidebar -->
