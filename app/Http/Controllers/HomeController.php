@@ -48,7 +48,7 @@ class HomeController extends Controller
             $type = $typeService->getById($typeId);
             //$plan = $planService->getById($planId);
             $transaction->transaction_type = $type;
-            $transaction->transaction_plan = $plan;
+            //$transaction->transaction_plan = $plan;
             if(preg_match('/deposit/i', $type->name)) {
                 $noOfDeposits += 1;
             } else {
