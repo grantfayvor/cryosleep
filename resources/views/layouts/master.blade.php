@@ -242,7 +242,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6">
                     <div class="copyright">
-                        <p>Copyright &copy; 2017. All rights reserved. Cryptoflare Ltd<a href="#"> Legal</a>
+                        <p>Copyright &copy; 2017. All rights reserved. Cryptoflare Ltd
                         </p>
                     </div>
                 </div>

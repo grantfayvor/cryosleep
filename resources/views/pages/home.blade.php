@@ -487,10 +487,9 @@
                         </thead>
                         <tbody>
                         @foreach($transactions as $transaction)
-                            
                             <tr>
                                 <td>{{$transaction->created_at}}</td>
-                                <td>{{$transaction->amount ?? $transaction->amount_to_pay}}</td>
+                                <td>{{$transaction->amount ?: $transaction->amount_to_pay}}</td>
                                 <td>{{$transaction->payment_address}}</td>
                                 <td>{{$transaction->transaction_plan->name}}</td>
                                 <td>{{$transaction->transaction_type->name}}</td>
