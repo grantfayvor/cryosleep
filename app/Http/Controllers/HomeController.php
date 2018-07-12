@@ -56,7 +56,9 @@ class HomeController extends Controller
             }
             array_push($transactionsResult, $transaction);
         }
-        $transactionsResult = array_chunk($transactionsResult, 10)[0];
+        if(count($transactionsResult) != 0) {
+            $transactionsResult = array_chunk($transactionsResult, 10)[0];
+        }
         // dd($transactionsResult);
         return view('pages.home', ['deposits' => $noOfDeposits, 'users' => $noOfUsers, 'withdrawals' => $noOfWithdrawals, 'transactions' => $transactionsResult]);
     }
