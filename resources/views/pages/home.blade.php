@@ -493,7 +493,8 @@
                                 <td>{{$transaction->amount ?? $transaction->amount_to_pay}}</td>
                                 {{--<td>{{$transaction->payment_address}}</td>--}}
                                 {{--<td><script> document.write(payload.transaction_plan_name); </script></td>--}}
-                                <td><script> document.write(payload.transaction_type_name); </script></td>
+                                <td><script> document.write(payload.transaction_type_name);{{dd($transaction)}} </script></td>
+
                                 <td>{{$transaction->user->username}}</td>
                             </tr>
                         @endforeach
