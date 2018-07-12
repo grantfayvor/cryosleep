@@ -487,14 +487,12 @@
                         </thead>
                         <tbody>
                         @foreach($transactions as $transaction)
-                            
-                            {{dd($transaction)}}
                             <tr>
                                 <td>{{$transaction->created_at}}</td>
                                 <td>{{$transaction->amount ?? $transaction->amount_to_pay}}</td>
                                 {{--<td>{{$transaction->payment_address}}</td>--}}
                                 {{--<td><script> document.write(payload.transaction_plan_name); </script></td>--}}
-                                @if($payload['transaction_type_id'] == 2)
+                                @if(json_decode($transaction->payload)['transaction_type_id'] == 2)
                                 <td><label class="label label-success">Deposit</label></td>
                                 @else
                                     <td><label class="label label-danger">Deposit</label></td>
