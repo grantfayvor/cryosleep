@@ -1,9 +1,12 @@
-<section class="content-header" data-ng-init="getUserTransactions()">
+<section class="content-header" data-ng-init="getUserTransactions();getAllTransactions();">
     <h1>
         Dashboard
     </h1>
     <ol class="breadcrumb">
-        <li><a href="javascript:void(0)"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>
+            <a href="javascript:void(0)">
+                <i class="fa fa-dashboard"></i> Home</a>
+        </li>
         <li class="active">Dashboard</li>
     </ol>
 </section>
@@ -14,11 +17,13 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <span class="info-box-icon bg-aqua">
+                    <i class="ion ion-ios-gear-outline"></i>
+                </span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Deposit</span>
-                    <span class="info-box-number" data-ng-bind="depositInfo.totalAmount || 0"></span>
+                    <span class="info-box-text">Total Transactions</span>
+                    <span class="info-box-number" data-ng-bind="transactionInfo.totalAmount || 0"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -27,11 +32,13 @@
         <!-- /.col -->
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-credit-card"></i></span>
+                <span class="info-box-icon bg-red">
+                    <i class="fa fa-credit-card"></i>
+                </span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Last Withdrawal</span>
-                    <span class="info-box-number" data-ng-bind="withdrawalInfo.lastWithdrawal || 'No withdrawals yet'"></span>
+                    <span class="info-box-number" data-ng-bind="withdrawalDetails.lastWithdrawal || 'No withdrawals yet'"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -44,7 +51,9 @@
 
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                <span class="info-box-icon bg-green">
+                    <i class="ion ion-ios-cart-outline"></i>
+                </span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Pending Withdrawal</span>
@@ -57,11 +66,13 @@
         <!-- /.col -->
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+                <span class="info-box-icon bg-yellow">
+                    <i class="ion ion-ios-people-outline"></i>
+                </span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Last Deposit</span>
-                    <span class="info-box-number" data-ng-bind="depositInfo.lastDeposit || 0"></span>
+                    <span class="info-box-text">Last Transaction</span>
+                    <span class="info-box-number" data-ng-bind="transactionInfo.lastDeposit || 0"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -73,11 +84,13 @@
 
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-cloud-download"></i></span>
+                <span class="info-box-icon bg-green">
+                    <i class="fa fa-cloud-download"></i>
+                </span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Withdrawal Total</span>
-                    <span class="info-box-number" data-ng-bind="withdrawalInfo.approvedTotal || 0"></span>
+                    <span class="info-box-number" data-ng-bind="withdrawalDetails.total || 0"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -86,11 +99,13 @@
         <!-- /.col -->
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fa fa-wifi"></i></span>
+                <span class="info-box-icon bg-yellow">
+                    <i class="fa fa-wifi"></i>
+                </span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Active Deposit</span>
-                    <span class="info-box-number" data-ng-bind="depositInfo.activeDeposit || 'No active deposits'"></span>
+                    <span class="info-box-text">Active Transaction</span>
+                    <span class="info-box-number" data-ng-bind="transactionInfo.activeDeposit || 'No active transaction'"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -101,11 +116,41 @@
 
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-bolt"></i></span>
+                <span class="info-box-icon bg-green">
+                    <i class="fa fa-bolt"></i>
+                </span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Earned Total</span>
-                    <span class="info-box-number" data-ng-bind="withdrawalInfo.approvedTotal > depositInfo.totalAmount ? withdrawalInfo.approvedTotal - depositInfo.totalAmount : 'No earnings yet'"></span>
+                    <span class="info-box-number" data-ng-bind="withdrawalDetails.total > depositDetails.total ? withdrawalDetails.total - depositDetails.total : 'No earnings yet'"></span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red">
+                    <i class="fa fa-credit-card"></i>
+                </span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Last Deposit</span>
+                    <span class="info-box-number" data-ng-bind="depositDetails.lastDeposit || 'No deposits yet'"></span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green">
+                    <i class="fa fa-cloud-download"></i>
+                </span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Deposit Total</span>
+                    <span class="info-box-number" data-ng-bind="depositDetails.total || 0"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
