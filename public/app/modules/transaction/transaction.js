@@ -252,8 +252,10 @@
             $scope.transaction.payload = JSON.stringify({
                 transaction_plan_id: $scope.transaction.transaction_plan_id,
                 transaction_type_id: $scope.transaction.transaction_type_id,
+                dummy: true,
                 details: {
-                    "amount_usd": Math.random() * 3000
+                    "amount_usd": Math.random() * 3000,
+                    "dummy": true
                 }
             });
             delete $scope.transaction.transaction_plan_id;

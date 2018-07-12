@@ -37,6 +37,7 @@
                             <th>Investment Duration</th>
                             <th>Amount (BTC)</th>
                             <th>Amount (USD)</th>
+                            <th>Dummy</th>
                             <!--<th>Actions</th>-->
                         </tr>
                         <tr data-ng-repeat="t in transactions | filter : tableSearch">
@@ -46,6 +47,7 @@
                             <td><span data-ng-bind="t.plan.investment_duration + ' days'"></span> </td>
                             <td><span data-ng-bind="t.amount"></span></td>
                             <td><span data-ng-bind="t.payload.details.amount_usd"></span></td>
+                            <td><span data-ng-bind="t.payload.dummy ? 'DUMMY' : 'REAL'"</td></span>
                             <!--<td><button type="button" data-ng-click="deleteTransaction(t.id)" class="btn btn-sm btn-danger">Delete <i class="fa fa-times"></i> </button> </td>-->
                         </tr>
                     </table>
