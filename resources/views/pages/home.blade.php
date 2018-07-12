@@ -487,10 +487,7 @@
                         </thead>
                         <tbody>
                         @foreach($transactions as $transaction)
-                            <?php
-                                $payload = json_decode($transaction->payload);
-
-                            ?>
+                            
                             {{dd($transaction)}}
                             <tr>
                                 <td>{{$transaction->created_at}}</td>
