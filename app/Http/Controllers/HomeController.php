@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function home(Request $request, cointpayment_log_trxRepository $transactionRepo, 
                             UserRepository $userRepo, WithdrawalInfoRepository $withdrawalRepo)
     {
-        $transactions = $transactionRepo->getAll();
+        $transactions = $transactionRepo->getAll(10);
         $noOfDeposits = $transactions->count();
         $noOfUsers = $userRepo->getAll()->count();
         $noOfWithdrawals = $withdrawalRepo->getAll()->count();
