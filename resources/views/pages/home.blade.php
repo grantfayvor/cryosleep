@@ -492,11 +492,12 @@
                                 <td>{{$transaction->amount ?? $transaction->amount_to_pay}}</td>
                                 {{--<td>{{$transaction->payment_address}}</td>--}}
                                 {{--<td><script> document.write(payload.transaction_plan_name); </script></td>--}}
-                                @if(json_decode($transaction->payload)['transaction_type_id'] == 2)
-                                <td><label class="label label-success">Deposit</label></td>
-                                @else
-                                    <td><label class="label label-danger">Deposit</label></td>
-                                @endif
+                                <td><label class="label label-success">{{$transaction->payload}}</label></td>
+                                {{--@if(json_decode($transaction->payload)['transaction_type_id'] == 2)--}}
+                                {{--<td><label class="label label-success">Deposit</label></td>--}}
+                                {{--@else--}}
+                                    {{--<td><label class="label label-danger">Deposit</label></td>--}}
+                                {{--@endif--}}
 
                                 <td>{{$transaction->user->username}}</td>
                             </tr>
