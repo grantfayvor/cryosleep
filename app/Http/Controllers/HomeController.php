@@ -44,7 +44,7 @@ class HomeController extends Controller
         foreach($transactions as $transaction) {
             $transaction->payload = json_decode($transaction->payload);
             $typeId = $transaction->payload->transaction_type_id ?: $transaction->payload->details->transaction_type_id;
-            $planId = $transaction->payload->transaction_plan_id ?: $transaction->payload->details->transaction_plan_id;
+            //$planId = $transaction->payload->transaction_plan_id ?: $transaction->payload->details->transaction_plan_id;
             $type = $typeService->getById($typeId);
             $plan = $planService->getById($planId);
             $transaction->transaction_type = $type;
