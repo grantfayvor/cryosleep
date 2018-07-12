@@ -479,8 +479,8 @@
                             <td>Time Stamp</td>
                             <td>Amount</td>
                             <td>Address</td>
-                            {{--<td>Transaction Plan</td>
-                            <td>Transaction Type</td>--}}
+                            <td>Transaction Plan</td>
+                            <td>Transaction Type</td>
                             <td>User</td>
 
                         </tr>
@@ -492,8 +492,8 @@
                                 <td>{{$transaction->created_at}}</td>
                                 <td>{{$transaction->amount ?? $transaction->amount_to_pay}}</td>
                                 <td>{{$transaction->payment_address}}</td>
-                                {{--<td><script> document.write(payload.transaction_plan_name); </script></td>
-                                <td><script> document.write(payload.transaction_type_name); </script></td>--}}
+                                <td>{{$transaction->transaction_plan->name}}</td>
+                                <td>{{$transaction->transaction_type->name}}</td>
                                 <td>{{$transaction->user->username}}</td>
                             </tr>
                         @endforeach
