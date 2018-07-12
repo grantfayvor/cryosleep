@@ -491,7 +491,7 @@
                                 $payload = json_decode($transaction->payload);
 
                             ?>
-                            
+                            {{dd($transaction)}}
                             <tr>
                                 <td>{{$transaction->created_at}}</td>
                                 <td>{{$transaction->amount ?? $transaction->amount_to_pay}}</td>
