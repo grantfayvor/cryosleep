@@ -31,7 +31,8 @@
 
                             <div class="col-sm-9">
                                 <select id="userId" class="form-control" data-ng-model="transaction.user_id" data-ng-options="user.id as user.username for user in users"
-                                    required="">
+                                    required="" data-ng-required="true">
+                                    <option></option>
                                 </select>
                             </div>
                         </div>
@@ -64,7 +65,8 @@
 
                             <div class="col-sm-9">
                                 <select id="transaction_type_id" class="form-control" data-ng-model="transaction.transaction_type_id" data-ng-options="transactionType.id as transactionType.name for transactionType in transactionTypes"
-                                    required="">
+                                    required="" data-ng-required="true">
+                                    <option></option>
                                 </select>
                             </div>
                         </div>
@@ -73,7 +75,8 @@
 
                             <div class="col-sm-9">
                                 <select id="transaction_plan_id" class="form-control" data-ng-model="transaction.transaction_plan_id" data-ng-options="transactionPlan.id as transactionPlan.name for transactionPlan in transactionPlans"
-                                    required="">
+                                    required="" data-ng-required="true">
+                                    <option></option>
                                 </select>
                             </div>
                         </div>
