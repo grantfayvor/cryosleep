@@ -42,10 +42,12 @@ class HomeController extends Controller
         $noOfWithdrawals = 0;
         foreach ($transactions as $transaction) {
             $transaction->payload = json_decode($transaction->payload);
-            if (property_exists($transaction->payload, 'transaction_type_id') || property_exists($transaction->payload->details, 'transaction_type_id')) {
+            if (property_exists($transaction->payload, 'transaction_type_id') || 
+                (property_exists($transaction->payload, 'details') && property_exists($transaction->payload->details, 'transaction_type_id'))) {
                 $typeId = $transaction->payload->transaction_type_id ?? $transaction->payload->details->transaction_type_id;
             }
-            if (property_exists($transaction->payload, 'transaction_plan_id') || property_exists($transaction->payload->details, 'transaction_plan_id')) {
+            if (property_exists($transaction->payload, 'transaction_plan_id') || 
+                (property_exists($transaction->payload, 'details') && property_exists($transaction->payload->details, 'transaction_plan_id'))) {
                 $planId = $transaction->payload->transaction_plan_id ?? $transaction->payload->details->transaction_plan_id;
             }
             $type = $typeService->getById($typeId ?? 0);
