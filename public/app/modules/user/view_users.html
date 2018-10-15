@@ -1,3 +1,57 @@
+<style>
+    .lbl {
+  position: relative;
+  display: block;
+  height: 20px;
+  width: 44px;
+  background: #898989;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lbl:after {
+  position: absolute;
+  left: -2px;
+  top: -3px;
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 100px;
+  background: #fff;
+  box-shadow: 0px 3px 3px rgba(0,0,0,0.05);
+  content: '';
+  transition: all 0.3s ease;
+}
+
+.lbl:active:after { transform: scale(1.15, 0.85); }
+
+.cbx:checked ~ label { background: #6fbeb5; }
+
+.cbx:checked ~ label:after {
+  left: 20px;
+  background: #179588;
+}
+
+.cbx:disabled ~ label {
+  background: #d5d5d5;
+  pointer-events: none;
+}
+
+.cbx:disabled ~ label:after { background: #bcbdbc; }
+
+.container {
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.demo { margin-bottom: 40px; }
+
+.hidden { display: none; }
+</style>
+
 <section class="content-header" data-ng-init="getAllUsers()">
     <h1>
         Users
@@ -26,7 +80,8 @@
 
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" data-ng-model="tableSearch" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <input type="text" data-ng-model="tableSearch" name="table_search" class="form-control pull-right"
+                                placeholder="Search">
 
                             <!--<div class="input-group-btn">-->
                             <!--<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
@@ -42,6 +97,7 @@
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>No of Referrals</th>
+                            <th>Enable Auto-withdraw</th>
                             <!--<th>Total Deposits</th>-->
                             <!--<th>Total Withdrawals</th>-->
                             <!--<th>Profit</th>-->
@@ -60,17 +116,22 @@
                             <td>
                                 <span data-ng-bind="user.referrals"></span>
                             </td>
+                            <td id="autw<%$index%>">
+                            </td>
                             <!--<td><span data-ng-bind="user.totalDeposits"></span></td>-->
                             <!--<td><span data-ng-bind="user.totalWithdrawals"></span></td>-->
                             <!--<td><span data-ng-bind="user.totalProfit"></span></td>-->
                             <td>
-                                <button type="button" class="btn btn-sm btn-danger" data-ng-click="showPaymentModal(user)">Pay User &nbsp;
+                                <button type="button" class="btn btn-sm btn-danger" data-ng-click="showPaymentModal(user)">Pay
+                                    User &nbsp;
                                     <i class="fa fa-money"></i>
                                 </button>
-                                <button type="button" class="btn btn-sm btn-info" data-ng-click="editUser(user)">Edit User &nbsp;
+                                <button type="button" class="btn btn-sm btn-info" data-ng-click="editUser(user)">Edit
+                                    User &nbsp;
                                     <i class="fa fa-circle-o"></i>
                                 </button>
-                                <button type="button" data-ng-click="deleteUser(user.id)" class="btn btn-sm btn-danger">Delete &nbsp;
+                                <button type="button" data-ng-click="deleteUser(user.id)" class="btn btn-sm btn-danger">Delete
+                                    &nbsp;
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
@@ -100,7 +161,8 @@
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="amount" class="control-label">Amount</label>
-                                <input type="number" id="amount" data-ng-model="payment.amount" class="form-control" required>
+                                <input type="number" id="amount" data-ng-model="payment.amount" class="form-control"
+                                    required>
                             </div>
                         </form>
                     </div>
@@ -126,7 +188,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">Edit User Role</h4>
+                    <h4 class="modal-title">Edit User</h4>
                 </div>
                 <div class="modal-body">
                     <ul class="todo-list">

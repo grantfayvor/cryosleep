@@ -8,14 +8,14 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Services\RolesAndClaimsService;
 use App\Services\TransactionService;
 use App\Services\UserService;
 use App\Services\WithdrawalInfoService;
 use Illuminate\Http\Request;
 
-class UserController {
+class UserController
+{
 
     private $service;
     private $transactionService;
@@ -23,8 +23,7 @@ class UserController {
     private $rolesService;
 
     public function __construct(UserService $userService, TransactionService $transactionService,
-                                WithdrawalInfoService $infoService, RolesAndClaimsService $rolesService)
-    {
+        WithdrawalInfoService $infoService, RolesAndClaimsService $rolesService) {
         $this->service = $userService;
         $this->transactionService = $transactionService;
         $this->withdrawalService = $infoService;
@@ -48,14 +47,20 @@ class UserController {
         return $this->service->delete($id);
     }
 
-    public function getUserRoles($userId) {
+    public function getUserRoles($userId)
+    {
         $user = $this->service->getById($userId);
         return response()->json($user->isAn('ADMIN') ? 'ADMIN' : 'USER');
     }
 
+    public function enableAutoWithdraw(Request $request)
+    {
+        return $this->service->enableAutoWithdraw($request);
+    }
+
     public function update(Request $request)
     {
-        if($request->role && $request->previousRole) {
+        if ($request->role && $request->previousRole) {
             $user = $this->service->getById($request->userId);
             $this->rolesService->assignRole($user, $request->role);
             $this->rolesService->retractUserRole($user, $request->previousRole);

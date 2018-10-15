@@ -13,7 +13,7 @@ use App\Repositories\cointpayment_log_trxRepository;
 use App\Repositories\UserRepository;
 use Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Http\Request;
 
 class UserService
 {
@@ -48,8 +48,8 @@ class UserService
             return back()->withInput()->withErrors(['registerError' => 'user was not successfully registered']);
         }
         return $this->authenticate($request->email, $request->password)
-            ? redirect()->intended('/')
-            : redirect('/login');
+        ? redirect()->intended('/')
+        : redirect('/login');
     }
 
     public function getAll(int $n = null, array $fields = null)
@@ -75,6 +75,14 @@ class UserService
     public function getByParam($param, $value)
     {
         return $this->repository->getByParam($param, $value);
+    }
+
+    public function enableAutoWithdraw($request)
+    {
+        if (!$this->repository->update($request->userId, ['auto_withdraw' => $request->autoWithdraw])) {
+            return response()->json(['message' => 'the user auto withdraw was not updated'], 500);
+        }
+        return response()->json(['message' => 'the user auto withdraw was successfully updated'], 200);
     }
 
     public function update($id, UserRequest $request)

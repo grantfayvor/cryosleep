@@ -310,7 +310,14 @@
         };
 
         $scope.makeWithdrawalRequest = function () {
+            if(!$scope.withdrawal.address) {
+                AlertService.alertify('please go to crypto account and fill in your account details', 'danger', 'Error');
+                return;
+            }
             WithdrawalService.makeWithdrawalRequest($scope.withdrawal, function (response) {
+                if(response.data && (response.data.url || (response.data.data && response.data.data.url))) {
+                    window.location.href = response.data.url || response.data.data.url;
+                }
                 AlertService.alertify('Your request for withdrawal was successful. You would be made aware when it has been approved', 'success', 'Success');
             }, function (response) {
                 AlertService.alertify('an error occurred while trying to process your request for withdrawal. please try again', 'danger', 'Error');

@@ -75,6 +75,22 @@ class TransactionService
         return response()->json(['url' => CoinPayment::withdrawal_url_payload($transaction)]);
     }
 
+    public function generateAutoWithdrawalURL($request)
+    {
+        $transaction['amountTotal'] = $request['amount_usd'];
+        $transaction['address'] = $request['address'];
+        $transaction['note'] = 'Transfer to client for payment';
+        $transaction['items'][0] = [
+            'descriptionItem' => 'Single transfer',
+            'priceItem' => $request['amount_usd'], // USD
+            'qtyItem' => 1,
+            'subtotalItem' => $request['amount_usd'] // USD
+        ];
+        $transaction['payload'] =  $request;
+
+        return CoinPayment::withdrawal_url_payload($transaction);
+    }
+
     public function ipn_webhook(Request $req)
     {
         $payment = CoinPayment::api_call('get_tx_info', [

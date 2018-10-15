@@ -44038,7 +44038,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
         };
 
         $scope.makeWithdrawalRequest = function () {
+            if(!$scope.withdrawal.address) {
+                AlertService.alertify('please go to crypto account and fill in your account details', 'danger', 'Error');
+                return;
+            }
             WithdrawalService.makeWithdrawalRequest($scope.withdrawal, function (response) {
+                if(response.data && (response.data.url || (response.data.data && response.data.data.url))) {
+                    window.location.href = response.data.url || response.data.data.url;
+                }
                 AlertService.alertify('Your request for withdrawal was successful. You would be made aware when it has been approved', 'success', 'Success');
             }, function (response) {
                 AlertService.alertify('an error occurred while trying to process your request for withdrawal. please try again', 'danger', 'Error');
@@ -44178,6 +44185,19 @@ Object.defineProperty(exports, '__esModule', { value: true });
         $scope.getAllUsers = function () {
             UserService.getAllUsers(function (response) {
                 $scope.users = response.data;
+                var htmlString = "";
+                setTimeout(function () {
+                    $scope.users.forEach(function (user, index) {
+                        if (user.auto_withdraw === true || user.auto_withdraw === 1) {
+                            htmlString = "<input type='checkbox' checked name='auto_withdraw' id='auto_withdraw" + index + "' class='cbx hidden' data-ng-change='enableAutoWithdraw(user, " + index + ")' class='form-control' data-ng-model='autoWithdraw'>" +
+                                "<label for='auto_withdraw" + index + "' class='lbl'></label>";
+                        } else {
+                            htmlString = "<input type='checkbox' name='auto_withdraw' id='auto_withdraw" + index + "' class='cbx hidden' data-ng-change='enableAutoWithdraw(user, " + index + ")' class='form-control' data-ng-model='autoWithdraw'>" +
+                                "<label for='auto_withdraw" + index + "' class='lbl'></label>";
+                        }
+                        $('#autw' + index).html(htmlString);
+                    });
+                });
             }, function (response) {
                 AlertService.alertify('an error occurred while trying to fetch the users. please reload this page', 'danger', 'Error');
             });
@@ -44196,6 +44216,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
         $scope.editUser = function (user) {
             $scope.user = user;
+
             UserService.getRoles(function (response) {
                 $scope.roles = response.data;
                 UserService.getUserRoles($scope.user.id, function (resp) {
@@ -44228,6 +44249,17 @@ Object.defineProperty(exports, '__esModule', { value: true });
             }, function (response) {
                 $('#roleModal').modal('hide');
                 AlertService.alertify('an error occurred while trying to update the user', 'danger', 'Error');
+            });
+        };
+
+        $scope.enableAutoWithdraw = function (user, index) {
+            UserService.enableAutoWithdraw({
+                userId: user.id,
+                autoWithdraw: document.getElementById('auto_withdraw' + index).classList.contains('ng-empty') ? true : false
+            }, function (response) {
+                AlertService.alertify('the user\'s auto-withdraw status was successfully updated', 'success', 'Success');
+            }, function (response) {
+                AlertService.alertify('an error occurred while trying to update the auto-withdraw status. please try again', 'danger', 'Error');
             });
         };
 
@@ -44283,6 +44315,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
         this.updateUser = function (details, successHandler, errorHandler) {
             APIService.put(userURL + '/update', details, successHandler, errorHandler);
+        };
+
+        this.enableAutoWithdraw = function (details, successHandler, errorHandler) {
+            APIService.put(userURL + '/withdraw/auto', details, successHandler, errorHandler);
         };
 
         this.getAddressForUser = function (userId, successHandler, errorHandler) {

@@ -37,6 +37,7 @@ class TransactionRequest extends FormRequest
             "amount_btc" => $this->amount_btc,
             "user_id" => $this->user()->id,
             'recipient_address' => $this->recipient_address,
+            'address' => $this->address,
             'withdrawal_info_id' => $this->withdral_info
         ];
     }

@@ -73,6 +73,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
     Route::delete('/user/{id}', 'UserController@delete')->middleware('admin');
     Route::get('/user/roles/{userId}', 'UserController@getUserRoles')->middleware('admin');
     Route::put('/user/update', 'UserController@update')->middleware('admin');
+    Route::put('/user/withdraw/auto', 'UserController@enableAutoWithdraw')->middleware('admin');
 
     Route::get('/role-with-claims', 'RolesAndClaimsController@getAllRoles')->middleware('admin');
     Route::post('/role-with-claims/create', 'RolesAndClaimsController@create')->middleware('admin');
